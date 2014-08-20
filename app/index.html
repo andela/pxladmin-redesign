@@ -1,31 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" class="no-js">
+<html lang="en" ng-app="pxlAdmin" class="no-js">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/app.css"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PXLAdmin</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,800,200,100,900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
-  <div ng-view></div>
-  <div>Angular seed app: v<span app-version></span></div>
+    <!-- ul class="menu">
+        <li><a href="#/view1">view1</a></li>
+        <li><a href="#/view2">view2</a></li>
+    </ul -->
+    <div id="login-div">
+        <div id="login-form">
+            <form action="" method="POST" role="form">
+                <h2>Login to PXLAdmin</h2>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="" placeholder="Password">
+                </div>
+                <input type="submit" class="btn btn-primary" value="Login">
+                <div class="post-login-options"><label for="remember_details"><input type="checkbox" name="remember_details"/> Remember username</label></div>
+                <div class="login-options"><a href="#">Forgot your password</a> | <a href="#">Create a new account</a></div>
+            </form>
+        </div>
+    </div>
+    <div ng-view></div>
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="bower_components/angular/angular.min.js"></script>
-  <script src="bower_components/angular-route/angular-route.min.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.min.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/services.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script>
+    <!-- In production use:
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+    -->
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+    <!-- script src="js/filters.js"></script -->
+    <!-- script src="js/directives.js"></script -->
 </body>
 </html>

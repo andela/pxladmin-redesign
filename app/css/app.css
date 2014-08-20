@@ -1,30 +1,61 @@
-/* app css stylesheet */
-
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+html, body {
+    height: 100%;
 }
-
-.menu:before {
-  content: "[";
+body {
+    background: url(../img/bg.jpg) no-repeat center center;
+    background-size: cover;
+    font-family: "Roboto", Arial, sans-serif;
 }
-
-.menu:after {
-  content: "]";
+#login-div {
+    position: relative;
+    background: rgba(255,255,255,0.9);
+    width: 350px;
+    height: 100%;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1)
 }
-
-.menu > li {
-  display: inline;
+#login-div #login-form {
+    position: absolute;
+    top:0; bottom: 0; left: 0; right: 0;
+    height: 50%;
+    margin: auto 0;
+    padding:0 30px;
 }
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
+#login-div #login-form h2 {
+    font-family: "Raleway", Arial, sans-serif;
+    font-weight: 200;
+    font-size: 1.7em;
+    margin-bottom: 20px;
 }
-
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
+#login-div #login-form input[type=submit] {
+    border-radius: 2px;
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 1.2em;
+    width: 100%;
+    height: 45px;
+    margin-top: 10px;
+    border: 1px solid, #1c78b1 (0.11,0.471,0.694);
+    background: #2e8ec9;
+    background: -moz-linear-gradient(bottom, #2789c7 0%, #3f9fd9 100%);
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,#2789c7), color-stop(100%,#3f9fd9));
+    background: -webkit-linear-gradient(bottom, #2789c7 0%,#3f9fd9 100%);
+    background: -o-linear-gradient(bottom, #2789c7 0%,#3f9fd9 100%);
+    background: -ms-linear-gradient(bottom, #2789c7 0%,#3f9fd9 100%);
+    background: linear-gradient(bottom, #2789c7 0%, #3f9fd9 100%) bottom (0.153,0.537,0.78) to top(0.247,0.624,0.851)filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f9fd9', endColorstr='#2789c7',GradientType=0 );
+}
+#login-div #login-form input[type=submit]:hover {
+    cursor: pointer;
+    box-shadow: inset 0px 2px 1px rgba(0,0,0,0.1);
+}
+#login-div #login-form .login-options, #login-div #login-form .post-login-options {
+    margin-top: 20px;
+}
+#login-div #login-form .login-options {
+    font-size: 0.9em;
+}
+form .form-group {
+    margin-bottom: 5px;
+}
+input.form-control {
+    border-radius: 2px;
+    height: 50px;
 }

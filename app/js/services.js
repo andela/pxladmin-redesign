@@ -1,9 +1,6 @@
-'use strict';
+angular.module('pxlAdmin.services', []).
+factory('pxlAdminService', function ($http) {
+	var pxlAdmin = {};
 
-/* Services */
-
-
-// Demonstrate how to register services
-// In this case it is a simple value service.
-angular.module('myApp.services', ['ngResource']).
-  value('version', '0.1');
+	return pxlAdmin;
+})
