@@ -15,23 +15,25 @@
         <li><a href="#/view1">view1</a></li>
         <li><a href="#/view2">view2</a></li>
     </ul -->
-    <div id="login-div">
+    <div id="login-div" ng-controller="loginController">
         <div id="login-form">
             <form action="" method="POST" role="form">
                 <h2>Login to PXLAdmin</h2>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="" placeholder="Username">
+                    <input type="text" class="form-control" id="" placeholder="Username" ng-model="pxl_username">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" id="" placeholder="Password">
+                    <input type="password" class="form-control" id="" placeholder="Password" ng-model="pxl_password">
                 </div>
-                <input type="submit" class="btn btn-primary" value="Login">
+                <input type="submit" class="btn btn-primary" value="Login" ng-click="doLogin()">
                 <div class="post-login-options"><label for="remember_details"><input type="checkbox" name="remember_details"/> Remember username</label></div>
-                <div class="login-options"><a href="#">Forgot your password</a> | <a href="#">Create a new account</a></div>
+                <div class="login-options"><a href="#">Forgot your password</a> | <a href="#/register">Create a new account</a></div>
             </form>
         </div>
     </div>
-    <div ng-view></div>
+    <div id="container-div">
+        <div ng-view></div>
+    </div>
 
     <!-- In production use:
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>

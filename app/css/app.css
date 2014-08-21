@@ -11,7 +11,7 @@ body {
     background: rgba(255,255,255,0.9);
     width: 350px;
     height: 100%;
-    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1)
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.5)
 }
 #login-div #login-form {
     position: absolute;
@@ -20,13 +20,14 @@ body {
     margin: auto 0;
     padding:0 30px;
 }
-#login-div #login-form h2 {
+h2 {
     font-family: "Raleway", Arial, sans-serif;
     font-weight: 200;
     font-size: 1.7em;
     margin-bottom: 20px;
+    margin-top: 0;
 }
-#login-div #login-form input[type=submit] {
+input[type=submit] {
     border-radius: 2px;
     font-family: "Roboto", Arial, sans-serif;
     font-size: 1.2em;
@@ -42,15 +43,33 @@ body {
     background: -ms-linear-gradient(bottom, #2789c7 0%,#3f9fd9 100%);
     background: linear-gradient(bottom, #2789c7 0%, #3f9fd9 100%) bottom (0.153,0.537,0.78) to top(0.247,0.624,0.851)filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f9fd9', endColorstr='#2789c7',GradientType=0 );
 }
-#login-div #login-form input[type=submit]:hover {
+input[type=submit]:hover {
     cursor: pointer;
     box-shadow: inset 0px 2px 1px rgba(0,0,0,0.1);
 }
-#login-div #login-form .login-options, #login-div #login-form .post-login-options {
+.login-options, .post-login-options {
     margin-top: 20px;
 }
-#login-div #login-form .login-options {
+.login-options {
     font-size: 0.9em;
+}
+#container-div {
+    position: absolute;
+    left: 350px; right: 0;
+    top: 0; bottom: 0;
+}
+#container-div #register-container {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 0; top: 0;
+    width: 50%;
+    height: 80%;
+    margin: auto auto;
+    background: #fff;
+    box-shadow: 0 0 12px 0 rgba(0,0,0,0.8);
+}
+#container-div #register-container .register-form {
+    padding: 30px 25px;
 }
 form .form-group {
     margin-bottom: 5px;
@@ -58,4 +77,7 @@ form .form-group {
 input.form-control {
     border-radius: 2px;
     height: 50px;
+}
+#container-div #register-container .register-form input.form-control {
+    height: 40px;
 }

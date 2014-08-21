@@ -6,6 +6,6 @@ angular.module('pxlAdmin', [
   'pxlAdmin.controllers'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'loginController'});
+  $routeProvider.when('/register', {templateUrl: 'partials/register.html', controller: 'registerController'});
   $routeProvider.otherwise({redirectTo: '/login'});
 }]);
