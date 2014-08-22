@@ -2,28 +2,46 @@
 <div id="register-container">
     <div class="status" ng-show="isRegistered">Registered as {{ registeredUser }}</div>
 	<div class="register-form">
-		<form action="" method="POST" role="form">
+		<form novalidate name="registerForm" action="" method="POST" role="form" ng-submit="doRegister()">
 	        <h2>Create an account</h2>
-	        <div class="form-group">
-	            <input type="text" class="form-control" id="" placeholder="Company" ng-model="userdetails.companyName">
+	        <div class="form-group" ng-class="{'has-error has-feedback': registerForm.companyName.$dirty && registerForm.companyName.$invalid, 'has-success has-feedback': registerForm.companyName.$valid}">
+	        	<label for="companyName" class="sr-only">Company</label>
+	            <input type="text" class="form-control" id="" name="companyName" placeholder="Company" ng-model="userdetails.companyName" required>
+	            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="registerForm.companyName.$valid"></span>
+	            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="registerForm.companyName.$dirty && registerForm.companyName.$invalid"></span>
 	        </div>
-	        <div class="form-group">
-	            <input type="text" class="form-control" id="" placeholder="SFDC ID" ng-model="userdetails.sfdcId">
+	        <div class="form-group" ng-class="{'has-error has-feedback': registerForm.sfdcId.$dirty && registerForm.sfdcId.$invalid, 'has-success has-feedback': registerForm.sfdcId.$valid}">
+	        	<label for="sfdcId" class="sr-only">SFDC ID</label>
+	            <input type="text" class="form-control" id="" name="sfdcId" placeholder="SFDC ID" ng-model="userdetails.sfdcId" required>
+	            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="registerForm.sfdcId.$valid"></span>
+	            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="registerForm.sfdcId.$dirty && registerForm.sfdcId.$invalid"></span>
 	        </div>
-	        <div class="form-group">
-	            <input type="text" class="form-control" id="" placeholder="First Name" ng-model="userdetails.contactFirst">
+	        <div class="form-group" ng-class="{'has-error has-feedback': registerForm.contactFirst.$dirty && registerForm.contactFirst.$invalid, 'has-success has-feedback': registerForm.contactFirst.$valid}">
+	        	<label for="contactFirst" class="sr-only">First Name</label>
+	            <input type="text" class="form-control" id="" name="contactFirst" placeholder="First Name" ng-model="userdetails.contactFirst" required>
+	            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="registerForm.contactFirst.$valid"></span>
+	            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="registerForm.contactFirst.$dirty && registerForm.contactFirst.$invalid"></span>
 	        </div>
-	        <div class="form-group">
-	            <input type="text" class="form-control" id="" placeholder="Last Name" ng-model="userdetails.contactLast">
+	        <div class="form-group" ng-class="{'has-error has-feedback': registerForm.contactLast.$dirty && registerForm.contactLast.$invalid, 'has-success has-feedback': registerForm.contactLast.$valid}">
+	        	<label for="contactLast" class="sr-only">Last Name</label>
+	            <input type="text" class="form-control" id="" name="contactLast" placeholder="Last Name" ng-model="userdetails.contactLast" required>
+	            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="registerForm.contactLast.$valid"></span>
+	            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="registerForm.contactLast.$dirty && registerForm.contactLast.$invalid"></span>
 	        </div>
-	        <div class="form-group">
-	            <input type="email" class="form-control" id="" placeholder="E-mail Address" ng-model="userdetails.contactEmail">
+	        <div class="form-group" ng-class="{'has-error has-feedback': registerForm.contactEmail.$dirty && registerForm.contactEmail.$invalid, 'has-success has-feedback': registerForm.contactEmail.$valid}">
+	        	<label for="contactEmail" class="sr-only">E-mail Address</label>
+	            <input type="email" class="form-control" id="" name="contactEmail" placeholder="E-mail Address" ng-model="userdetails.contactEmail" required>
+	            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="registerForm.contactEmail.$valid"></span>
+	            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="registerForm.contactEmail.$dirty && registerForm.contactEmail.$invalid"></span>
 	        </div>
-	        <div class="form-group">
-	            <input type="password" class="form-control" id="" placeholder="Password" ng-model="userdetails.contactPass">
+	        <div class="form-group" ng-class="{'has-error has-feedback': registerForm.contactPass.$dirty && registerForm.contactPass.$invalid, 'has-success has-feedback': registerForm.contactPass.$valid}">
+	        	<label for="contactPass" class="sr-only">Password</label>
+	            <input type="password" class="form-control" id="" name="contactPass" placeholder="Password" ng-model="userdetails.contactPass" required>
+	            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="registerForm.contactPass.$valid"></span>
+	            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="registerForm.contactPass.$dirty && registerForm.contactPass.$invalid"></span>
 	        </div>
 	        <div class="post-login-options"><label for="remember_details"><input type="checkbox" name="remember_details"/> I have read and agree with the <a href="#">terms and conditions</a></label></div>
-	        <input type="submit" class="btn btn-primary" value="Create Account" ng-click="doRegister()">
+	        <input type="submit" class="btn btn-primary" value="Create Account" ng-disabled="!registerForm.$valid">
 	    </form>
 	</div>
 </div>

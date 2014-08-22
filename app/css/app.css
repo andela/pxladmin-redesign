@@ -81,6 +81,10 @@ input.form-control {
 #container-div #register-container .register-form input.form-control {
     height: 40px;
 }
+.form-control-feedback {
+    height: 40px;
+    line-height: 40px;
+}
 #overlay {
     position: absolute;
     background: url(../img/loading.gif) no-repeat center center #000000;
