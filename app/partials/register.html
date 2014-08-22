@@ -1,4 +1,6 @@
+<div id="overlay" ng-show="registerActionPerformed"></div>
 <div id="register-container">
+    <div class="status" ng-show="isRegistered">Registered as {{ registeredUser }}</div>
 	<div class="register-form">
 		<form action="" method="POST" role="form">
 	        <h2>Create an account</h2>

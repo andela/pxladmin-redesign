@@ -9,15 +9,15 @@ factory('pxlAdminService', function ($http) {
 			method: 'POST',
 			// Use server side endpoint
 			url: base_url + '/api/login',
-			params: { un: username, pw: password }
+			data: { un: username, pw: password }
 		});
 	}
 
 	pxlAdmin.register = function(userdetails) {
 		return $http({
-			method: 'JSONP',
+			method: 'POST',
 			url: base_url + '/api/account/usercreate',
-			params: { accountData: {
+			data: { accountData: {
 				AmountOutstanding: 0,
 				TotalMonthSpend: 0,
 				campaignLimit: 0,

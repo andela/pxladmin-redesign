@@ -11,6 +11,7 @@ body {
     background: rgba(255,255,255,0.9);
     width: 350px;
     height: 100%;
+    min-height: 446px;
     box-shadow: 0 0 6px 0 rgba(0,0,0,0.5)
 }
 #login-div #login-form {
@@ -60,10 +61,9 @@ input[type=submit]:hover {
 }
 #container-div #register-container {
     position: absolute;
-    left: 0; right: 0;
-    bottom: 0; top: 0;
+    left: 0; right: 0; top: 6em;
     width: 50%;
-    height: 80%;
+    min-height: 400px;
     margin: auto auto;
     background: #fff;
     box-shadow: 0 0 12px 0 rgba(0,0,0,0.8);
@@ -80,4 +80,11 @@ input.form-control {
 }
 #container-div #register-container .register-form input.form-control {
     height: 40px;
+}
+#overlay {
+    position: absolute;
+    background: url(../img/loading.gif) no-repeat center center #000000;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 9;
+    opacity: 0.5;
 }

@@ -1,18 +1,26 @@
 angular.module('pxlAdmin.controllers', []).
 controller('loginController', function ($scope, pxlAdminService) {
-	var isLoggedIn = false;
+	$scope.isLoggedIn = false;
 	$scope.doLogin = function() {
 		pxlAdminService.login($scope.pxl_username, $scope.pxl_password).success(function(response) {
-			isLoggedIn = true;
+			$scope.isLoggedIn = true;
+			$scope.loggedInUser = $scope.pxl_username;
 		});
 	}
 	
 }).
 controller('registerController', function ($scope, pxlAdminService) {
-	var isRegistered = false;
+	$scope.isRegistered = false;
+	// Transition for Registration
+	// $scope.registerActionPerformed = false;
 	$scope.doRegister = function() {
+		// Transition for Registration
+		// $scope.registerActionPerformed = true;
 		pxlAdminService.register($scope.userdetails).success(function(response) {
-			isRegistered = true;
+			$scope.isRegistered = true;
+			$scope.registeredUser = $scope.userdetails.contactFirst;
+			// Transition for Registration
+			// $scope.registerActionPerformed = false;
 		});
 	}
 });
