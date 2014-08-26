@@ -18,6 +18,7 @@ controller('registerController', function ($scope, pxlAdminService) {
 		// $scope.registerActionPerformed = true;
 		pxlAdminService.register($scope.userdetails).success(function(response) {
 			$scope.isRegistered = true;
+			// $timeout(function() { $scope.isRegistered = false }, 2000)
 			$scope.registeredUser = $scope.userdetails.contactFirst;
 			// Transition for Registration
 			// $scope.registerActionPerformed = false;

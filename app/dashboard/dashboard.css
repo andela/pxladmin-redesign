@@ -1,0 +1,180 @@
+/* Dashboard Page */
+body {
+    background: #F9F9F9;
+}
+#title-div {
+    background: #0e8dbc;
+    position: fixed;
+    top: 0; left:0; right:0;
+    height: 70px;
+    z-index: 9;
+}
+#user-div {
+    position: fixed;
+    top: 70px;
+    left: 0; right: 0;
+    background: #FFF;
+    z-index: 9;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,0.11);
+    border-top: solid 1px #efefef;
+}
+#user-div ul.elements {
+    list-style: none;
+    margin:0; padding:0;
+}
+#user-div ul.elements > li {
+    float: left;
+    width: 25%;
+    height: 55px;
+    line-height: 55px;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight:700;
+    font-size: 1.2em;
+    color: #999;
+}
+#user-div ul.elements > li.menu {
+    text-align: right;
+    padding-right: 35px;
+}
+#user-div ul.elements > li.menu button, #user-div ul.elements > li.menu ul li a {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 0.9em;
+}
+#user-div ul.elements > li a {
+}
+#container-div {
+    position: absolute;
+    top: 125px; bottom: 0px;
+    left: 0; right: 0;
+}
+#container-div .list-view {
+    background: #FFF;
+    position: fixed;
+    top: 125px; bottom: 0;
+    left: 0;
+    width: 250px;
+    padding-top: 15px;
+    border-right: solid 1px #efefef;
+}
+#container-div .list-view .campaign-list {
+    margin: 0; padding: 0;
+}
+#container-div .list-view .campaign-list li {
+    width: 100%;
+    padding: 25px;
+    border-bottom: #f9f9f9 solid 1px;
+    transition: all .3s;
+}
+#container-div .list-view .campaign-list li:hover {
+    background: #F9F9F9;
+    transition: all .3s;
+}
+#container-div .list-view .campaign-list li h1 {
+    font-family: "Raleway", Arial, sans-serif;
+    font-weight: 200;
+    font-size: 1.5em;
+    margin: 0;
+}
+#container-div .list-view .campaign-list li p {
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 500;
+    font-size: 1.0em;
+    margin: 0; margin-top: 5px;
+}
+#container-div .detail-view {
+    position: absolute;
+    left: 250px; right: 0; top: 0; bottom: 0;
+    padding: 35px;
+}
+#container-div .detail-view .campaign-detail {
+    background: #FFF;
+    width: 100%;
+    padding: 35px 45px;
+    box-shadow: 0 0 12px 0 rgba(0,0,0,0.1);
+}
+#container-div .detail-view .campaign-detail h1 {
+    font-family: "Raleway", Arial, sans-serif;
+    font-weight: 200;
+    font-size: 2.5em;
+    margin: 0;
+}
+#container-div .detail-view .campaign-detail h1 span.badge {
+    font-family: "Roboto", Arial, sans-serif;
+}
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #9FE9C5;
+    background: #CFFAE5;
+    border-radius: 4px;
+}
+.bs-callout h4 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.2em;
+    color: #54927E;
+}
+.bs-callout h4:last-child {
+    margin-bottom: 0px;
+}
+.bs-callout h4 span.value {
+    color: #168051;
+    font-weight: 200;
+}
+.campaign-statistics {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.2em;
+    color: #999;
+}
+.stats-div {
+    border: solid 1px #efefef;
+    padding: 20px 20px;
+    border-radius: 3px;
+    box-shadow: 0 0 7px 0 rgba(0,0,0,0.05);
+}
+.stats-div.impressions {
+    background: url(../img/eye.png) no-repeat 20px center;
+    padding-left: 104px;
+}
+.stats-div.clicks {
+    background: url(../img/trends.png) no-repeat 20px center;
+    padding-left: 104px;
+}
+.stats-div > h1 {
+    margin-bottom: 2px !important;
+    margin-top: 0 !important;
+}
+.stats-div > p {
+    font-family: "Roboto", Arial, sans-serif;
+    margin-bottom: 0 !important;
+}
+.vertical-button-group a {
+    display: block;
+}
+.vertical-button-group a.btn.btn-primary {
+    display: block;
+    border: 1px solid, #1c78b1 (0.11,0.471,0.694);
+    border-radius: 5px;
+    background: #2e8ec9;
+    background: -moz-linear-gradient(bottom, #2789c7 0%, #3f9fd9 100%);
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,#2789c7), color-stop(100%,#3f9fd9));
+    background: -webkit-linear-gradient(bottom, #2789c7 0%,#3f9fd9 100%);
+    background: -o-linear-gradient(bottom, #2789c7 0%,#3f9fd9 100%);
+    background: -ms-linear-gradient(bottom, #2789c7 0%,#3f9fd9 100%);
+    background: linear-gradient(bottom, #2789c7 0%, #3f9fd9 100%) bottom (0.153,0.537,0.78) to top(0.247,0.624,0.851)filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f9fd9', endColorstr='#2789c7',GradientType=0 );
+    margin-bottom: 5px;
+    font-family: "Roboto", Arial, sans-serif;
+    line-height: 1.7em;
+    text-align: left;
+}
+.vertical-button-group a.btn.btn-primary:hover {
+    box-shadow: inset 0px 2px 1px rgba(0,0,0,0.1);
+}
+.graphs {
+    margin-top: 50px;
+}

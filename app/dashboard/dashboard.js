@@ -1,11 +1,10 @@
 'use strict';
 // Declare app level module which depends on filters, and services
-angular.module('pxlAdmin', [
+angular.module('pxlAdminDashboard', [
 	'ngRoute',
-	'pxlAdmin.services',
-	'pxlAdmin.controllers'
+	'pxlAdminDashboard.controllers'
 ]).
 config(['$routeProvider', function($routeProvider) {
-	$routeProvider.when('/register', {templateUrl: 'partials/register.html', controller: 'registerController'});
+	// $routeProvider.when('/register', {templateUrl: 'partials/register.html', controller: 'registerController'});
 	// $routeProvider.otherwise({redirectTo: '/login'});
 }]);

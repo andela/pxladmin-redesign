@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="pxlAdminDashboard" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PXLAdmin Dashboard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,800,200,100,900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="dashboard.css"/>
+</head>
+<body>
+    <div id="title-div">
+
+    </div>
+    <div id="user-div" ng-controller="userController">
+        <ul class="elements">
+            <li></li>
+            <li><a href="#">Bluewolf</a></li>
+            <li>Balance: <a href="#">$12,458</a></li>
+            <li class="menu">
+                <div class="btn-group">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Menu <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li><a href="#">Acccount</a></li>
+                        <li><a href="#">New Creative</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div id="container-div">
+        <div class="list-view">
+            <ul class="campaign-list">
+                <li>
+                    <h1>Campaign 1</h1>
+                    <p>11000</p>
+                </li>
+                <li>
+                    <h1>Campaign 1</h1>
+                    <p>11000</p>
+                </li>
+                <li>
+                    <h1>Campaign 1</h1>
+                    <p>11000</p>
+                </li>
+            </ul>
+        </div>
+        <div class="detail-view">
+            <div class="campaign-detail">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h1>Campaign 1 <span class="badge">Active</span></h1>
+                        <div class="bs-callout bs-callout-info">
+                            <h4>Campaign ID: <span class="value">ID0034</span></h4>
+                            <h4>Landing Page URL: <span class="value"><a href="#">URL</a></span></h4>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="vertical-button-group">
+                            <a href="#" class="btn btn-primary">Edit</a>
+                            <a href="#" class="btn btn-primary">Disable</a>
+                            <a href="#" class="btn btn-primary">Manage Creatives</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Campaign Statistics -->
+                <div class="section-header campaign-statistics">Campaign Statistics</div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="stats-div clicks">
+                            <h1>170K</h1>
+                            <p>Clicks</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-div impressions">
+                            <h1>40K</h1>
+                            <p>Impressions</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-div clicks">
+                            <h1>1,491</h1>
+                            <p>Clicks</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-div impressions">
+                            <h1>694</h1>
+                            <p>Impressions</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row graphs">
+                    <div class="col-md-6">
+                        <canvas id="clickChart" width="400px" height="400"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <canvas id="impressionChart" width="400px" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- In production use:
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+    -->
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../bower_components/chart-js/Chart.js"></script>
+    <script src="dashboard.js"></script>
+    <!-- script src="js/services.js"></script -->
+    <script src="dashboard_controllers.js"></script>
+    <!-- script src="js/filters.js"></script -->
+    <!-- script src="js/directives.js"></script -->
+    <script type="text/javascript">
+        // Get context with jQuery - using jQuery's .get() method.
+        var ctx_click = $("#clickChart").get(0).getContext("2d");
+        var ctx_impression = $("#impressionChart").get(0).getContext("2d");
+        var data = {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+            datasets: [
+                {
+                    label: "My First dataset",
+                    fillColor: "rgba(220,220,220,0.2)",
+                    strokeColor: "rgba(22,22,22,1)",
+                    pointColor: "rgba(22,22,22,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: [5, 16, 38, 81, 106, 155, 240]
+                }
+            ]
+        };
+        new Chart(ctx_click).Line(data, {
+            bezierCurve: false
+        });
+        new Chart(ctx_impression).Bar(data, {
+            bezierCurve: false
+        });
+    </script>
+</body>
+</html>
