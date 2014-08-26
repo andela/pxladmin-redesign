@@ -1,10 +1,10 @@
 angular.module('pxlAdmin.controllers', []).
-controller('loginController', function ($scope, pxlAdminService) {
+controller('loginController', function ($scope, pxlAdminService, $window) {
 	$scope.isLoggedIn = false;
 	$scope.doLogin = function() {
 		pxlAdminService.login($scope.pxl_username, $scope.pxl_password).success(function(response) {
 			$scope.isLoggedIn = true;
-			$scope.loggedInUser = $scope.pxl_username;
+			$window.location.href = "/dashboard/#/" + response._id;
 		});
 	}
 	
@@ -17,9 +17,9 @@ controller('registerController', function ($scope, pxlAdminService) {
 		// Transition for Registration
 		// $scope.registerActionPerformed = true;
 		pxlAdminService.register($scope.userdetails).success(function(response) {
-			$scope.isRegistered = true;
+			// $scope.isRegistered = true;
 			// $timeout(function() { $scope.isRegistered = false }, 2000)
-			$scope.registeredUser = $scope.userdetails.contactFirst;
+			// $scope.registeredUser = $scope.userdetails.contactFirst;
 			// Transition for Registration
 			// $scope.registerActionPerformed = false;
 		});
