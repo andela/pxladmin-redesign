@@ -6,6 +6,7 @@
     <title>PXLAdmin Dashboard</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../bower_components/nvd3/nv.d3.css"/>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,800,200,100,900' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
     <link rel="stylesheet" href="dashboard.css"/>
@@ -15,11 +16,9 @@
 
     </div>
     <div id="user-div" ng-controller="userController">
-        <ul class="elements">
-            <li></li>
-            <li class="user"><a href="#">Bluewolf</a></li>
-            <li>Balance: <a href="#">$12,458</a></li>
-            <li class="menu">
+        <div class="user-information">
+            <div class="balance">Balance: <a href="#">$12,458</a></div>
+            <div class="menu">
                 <div class="btn-group">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                         Menu <span class="caret"></span>
@@ -29,14 +28,21 @@
                         <li><a href="#">New Creative</a></li>
                     </ul>
                 </div>
-            </li>
-        </ul>
+            </div>
+        </div>
+        <div class="campaign-menu">
+            <div class="call_to_action">Campaigns <a href="#" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Create</a></div>
+            <div class="user"><a href="#">Bluewolf</a></div>
+        </div>
     </div>
     <ng-view></ng-view>
     <!-- In production use:
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
     -->
     <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/d3/d3.js"></script>
+    <script src="../bower_components/nvd3/nv.d3.js"></script>
+    <script src="../bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js"></script>
     <script src="../bower_components/angular-route/angular-route.min.js"></script>
     <script src="../bower_components/angular-resource/angular-resource.min.js"></script>
     <script src="../bower_components/jquery/dist/jquery.js"></script>

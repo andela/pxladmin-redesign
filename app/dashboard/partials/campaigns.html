@@ -1,10 +1,9 @@
 <div id="container-div">
     <div class="list-view">
-        <h3>Your Campaigns</h3>
         <ul class="campaign-list">
             <li ng-repeat="campaign in campaigns" ng-class="{selected: $index === selectedIndex}" ng-click="setSelected($index)">
                 <h1>{{ campaign.name }}</h1>
-                <p>11000</p>
+                <p>{{ campaign.campaignId }}</p>
             </li>
         </ul>
     </div>
@@ -12,17 +11,20 @@
         <div class="campaign-detail">
             <div class="row">
                 <div class="col-md-9">
-                    <h1>{{ campaigns[selectedIndex].name }} <span class="badge">Active</span></h1>
+                    <h1>{{ campaigns[selectedIndex].name }} <span ng-class="{'badge success': campaigns[selectedIndex].status == 'Active', 'badge warning': campaigns[selectedIndex].status == 'Pending', 'badge danger': campaigns[selectedIndex].status == 'Inactive'}">{{ campaigns[selectedIndex].status }}</span></h1>
                     <div class="bs-callout bs-callout-info">
-                        <h4>Campaign ID: <span class="value">ID0034</span></h4>
-                        <h4>Landing Page URL: <span class="value"><a ng-href="{{ campaigns[selectedIndex].landingUrl }}">{{ campaigns[selectedIndex].landingUrl }}</a></span></h4>
+                        <h4>Campaign ID: <span class="value">{{ campaigns[selectedIndex].campaignId }}</span></h4>
+                        <h4>Landing Page URL:
+                            <span class="value" ng-show="campaigns[selectedIndex].landingUrl"><a ng-href="http://{{ campaigns[selectedIndex].landingUrl }}">{{ campaigns[selectedIndex].landingUrl }}</a></span>
+                            <span class="value" ng-hide="campaigns[selectedIndex].landingUrl"><a ng-click="setLandingUrl()">Set Landing Page URL</a></span>
+                        </h4>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="vertical-button-group">
-                        <a href="#" class="btn btn-primary">Edit</a>
-                        <a href="#" class="btn btn-primary">Disable</a>
-                        <a href="#" class="btn btn-primary">Manage Creatives</a>
+                        <a href="#/edit/{{ id }}" class="btn btn-primary">Edit</a>
+                        <a href="#/disable/{{ id }}" class="btn btn-primary">Disable</a>
+                        <a href="#/manage/{{ id }}" class="btn btn-primary">Manage Creatives</a>
                     </div>
                 </div>
             </div>
@@ -31,64 +33,51 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="stats-div clicks">
-                        <h1>170K</h1>
-                        <p>Clicks</p>
+                        <h1>{{ campaigns[selectedIndex].thisMonthClicks ? campaigns[selectedIndex].thisMonthClicks : 0 }}</h1>
+                        <p>Clicks this month</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="stats-div impressions">
-                        <h1>40K</h1>
-                        <p>Impressions</p>
+                        <h1>{{ campaigns[selectedIndex].thisMonthImpressions ? campaigns[selectedIndex].thisMonthImpressions : 0 }}</h1>
+                        <p>Impressions this month</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="stats-div clicks">
-                        <h1>1,491</h1>
-                        <p>Clicks</p>
+                        <h1>{{ campaigns[selectedIndex].totalClicks ? campaigns[selectedIndex].totalClicks : 0 }}</h1>
+                        <p>Total Clicks</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="stats-div impressions">
-                        <h1>694</h1>
-                        <p>Impressions</p>
+                        <h1>{{ campaigns[selectedIndex].totalImpressions ? campaigns[selectedIndex].totalImpressions : 0 }}</h1>
+                        <p>Total Impressions</p>
                     </div>
                 </div>
             </div>
-            <!-- div class="row graphs">
-                <div class="col-md-6">
-                    <canvas id="clickChart" width="400px" height="400"></canvas>
+            <div class="row graphs">
+                <div class="col-md-5">
+                    <div class="graph-title">Daily Clicks</div>
+                    <nvd3-line-chart
+                        data="clickData"
+                        showXAxis="true"
+                        showYAxis="true"
+                        tooltips="true"
+                        interactive="true">
+                    </nvd3-line-chart>
                 </div>
-                <div class="col-md-6">
-                    <canvas id="impressionChart" width="400px" height="400"></canvas>
+                <div class="col-md-7">
+                    <div class="graph-title">Daily Impressions</div>
+                    <nvd3-multi-bar-chart
+                        data="impressionData"
+                        showXAxis="true"
+                        showYAxis="true"
+                        tooltips="true"
+                        interactive="true">
+                    </nvd3-line-chart>
                 </div>
-            </div -->
+            </div>
         </div>
     </div>
 </div>
-<!-- script src="../bower_components/chart-js/Chart.js"></script>
-<script type="text/javascript">
-    // Get context with jQuery - using jQuery's .get() method.
-    var ctx_click = $("#clickChart").get(0).getContext("2d");
-    var ctx_impression = $("#impressionChart").get(0).getContext("2d");
-    var data = {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-        datasets: [
-            {
-                label: "My First dataset",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(22,22,22,1)",
-                pointColor: "rgba(22,22,22,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data: [5, 16, 38, 81, 106, 155, 240]
-            }
-        ]
-    };
-    new Chart(ctx_click).Line(data, {
-        bezierCurve: false
-    });
-    new Chart(ctx_impression).Bar(data, {
-        bezierCurve: false
-    });
-</script -->
