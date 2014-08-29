@@ -278,3 +278,18 @@ body {
 .badge.danger {
     background: #c9302c;
 }
+.modal-content-div {
+    text-align: center
+}
+.modal-content-div h3 {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.modal-content-div input.form-control {
+    border-radius: 2px;
+    height: 50px;
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 1.4em;
+}
