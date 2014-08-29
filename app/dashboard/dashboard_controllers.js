@@ -15,7 +15,7 @@ controller('userController', function ($scope, $stateParams, $timeout, $upload, 
 	        	console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
 	      	}).success(function(data, status, headers, config) {
 	        	console.log(data);
-	        	$('#creative_upload_modal').modal('show');
+	        	$('#creative_upload_modal').modal('hide');
 	      	});
 	      	//.error(...)
 	      	//.then(success, error, progress); 

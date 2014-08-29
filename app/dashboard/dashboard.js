@@ -21,8 +21,6 @@ config(function($stateProvider, $urlRouterProvider) {
     // $urlRouterProvider.otherwise('/:id');
     
     $stateProvider
-        
-        // CAMPAIGNS PAGE AND MULTIPLE NAMED VIEWS =================================
         .state('campaigns', {
             url: '/:id',
 	        views: {
