@@ -24,8 +24,7 @@ config(function($stateProvider, $urlRouterProvider) {
         .state('campaigns', {
             url: '/:id',
 	        views: {
-
-	            // the main template will be placed here (relatively named)
+	        	
 	            '': {
 	            	templateUrl: 'partials/header.html',
 	            	controller: 'userController'
