@@ -1,10 +1,11 @@
 html, body {
     height: 100%;
 }
-body {
+#body-replacement {
     background: url(../img/bg.jpg) no-repeat center center;
     background-size: cover;
     font-family: "Roboto", Arial, sans-serif;
+    height: 100%;
 }
 #login-div {
     position: relative;
@@ -54,12 +55,12 @@ input[type=submit]:hover {
 .login-options {
     font-size: 0.9em;
 }
-#container-div {
+#register-container-div {
     position: absolute;
     left: 350px; right: 0;
     top: 0; bottom: 0;
 }
-#container-div #register-container {
+#register-container-div #register-container {
     position: absolute;
     left: 0; right: 0; top: 6em;
     width: 50%;
@@ -68,7 +69,7 @@ input[type=submit]:hover {
     background: #fff;
     box-shadow: 0 0 12px 0 rgba(0,0,0,0.8);
 }
-#container-div #register-container .register-form {
+#register-container-div #register-container .register-form {
     padding: 30px 25px;
 }
 form .form-group {
@@ -78,7 +79,7 @@ input.form-control {
     border-radius: 2px;
     height: 50px;
 }
-#container-div #register-container .register-form input.form-control {
+#register-container-div #register-container .register-form input.form-control {
     height: 40px;
 }
 .form-control-feedback {

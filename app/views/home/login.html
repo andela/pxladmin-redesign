@@ -1,0 +1,21 @@
+<div id="body-replacement">
+    <div id="login-div">
+        <div id="login-form">
+            <form method="GET" role="form">
+                <h2>Login to PXLAdmin</h2>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="" placeholder="Username" ng-model="pxl_username">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="" placeholder="Password" ng-model="pxl_password">
+                </div>
+                <input type="submit" class="btn btn-primary" value="Login" ng-click="doLogin()">
+                <div class="post-login-options"><label for="remember_details"><input type="checkbox" name="remember_details"/> Remember username</label></div>
+                <div class="login-options"><a href="#">Forgot your password</a> | <a ui-sref=".register">Create a new account</a></div>
+            </form>
+        </div>
+    </div>
+    <div id="register-container-div">
+        <div ui-view></div>
+    </div>
+</div>

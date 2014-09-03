@@ -91,12 +91,12 @@ body {
 #user-div .user-information .balance {
     margin-right: 50px;
 }
-#container-div {
+#campaign-container-div {
     position: absolute;
     top: 125px; bottom: 0px;
     left: 0; right: 0;
 }
-#container-div .list-view {
+#campaign-container-div .list-view {
     background: #FFF;
     position: fixed;
     top: 125px; bottom: 0;
@@ -105,7 +105,7 @@ body {
     border-right: solid 1px #efefef;
     overflow-y: auto;
 }
-#container-div .list-view h3 {
+#campaign-container-div .list-view h3 {
    background: #efefef; /* Old browsers */
     background: -moz-linear-gradient(top,  #efefef 0%, #ffffff 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#efefef), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
@@ -122,10 +122,10 @@ body {
     color: #767676;
     border-bottom: solid 1px #efefef;
 }
-#container-div .list-view .campaign-list {
+#campaign-container-div .list-view .campaign-list {
     margin: 0; padding: 0;
 }
-#container-div .list-view .campaign-list li {
+#campaign-container-div .list-view .campaign-list li {
     background: url(../img/spark.png) no-repeat 30px center;
     width: 100%;
     padding: 25px;
@@ -133,52 +133,52 @@ body {
     border-bottom: #f9f9f9 solid 1px;
     transition: all .3s;
 }
-#container-div .list-view .campaign-list li:hover {
+#campaign-container-div .list-view .campaign-list li:hover {
     background-color: #f9f9f9;
     transition: all .3s;
     cursor: pointer;
 }
-#container-div .list-view .campaign-list li.selected {
+#campaign-container-div .list-view .campaign-list li.selected {
     background-image: url(../img/spark_blue.png);
     background-color: #323232;
 }
-#container-div .list-view .campaign-list li h1 {
+#campaign-container-div .list-view .campaign-list li h1 {
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 700;
     font-size: 1.2em;
     margin: 0;
     color: #656565;
 }
-#container-div .list-view .campaign-list li.selected h1 {
+#campaign-container-div .list-view .campaign-list li.selected h1 {
     color: #fff;
 }
-#container-div .list-view .campaign-list li p {
+#campaign-container-div .list-view .campaign-list li p {
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 500;
     font-size: 1.0em;
     margin: 0; margin-top: 2px;
 }
-#container-div .list-view .campaign-list li.selected p {
+#campaign-container-div .list-view .campaign-list li.selected p {
     color: #939393;
 }
-#container-div .detail-view {
+#campaign-container-div .detail-view {
     position: absolute;
     left: 250px; right: 0; top: 0; bottom: 0;
     padding: 35px;
 }
-#container-div .detail-view .campaign-detail {
+#campaign-container-div .detail-view .campaign-detail {
     background: #FFF;
     width: 100%;
     padding: 35px 45px;
     box-shadow: 0 0 12px 0 rgba(0,0,0,0.1);
 }
-#container-div .detail-view .campaign-detail h1 {
+#campaign-container-div .detail-view .campaign-detail h1 {
     font-family: "Raleway", Arial, sans-serif;
     font-weight: 200;
     font-size: 2.5em;
     margin: 0;
 }
-#container-div .detail-view .campaign-detail h1 span.badge {
+#campaign-container-div .detail-view .campaign-detail h1 span.badge {
     font-family: "Roboto", Arial, sans-serif;
 }
 .bs-callout {

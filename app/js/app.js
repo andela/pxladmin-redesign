@@ -1,11 +1,48 @@
 'use strict';
-// Declare app level module which depends on filters, and services
+
 angular.module('pxlAdmin', [
-	'ngRoute',
-	'pxlAdmin.services',
-	'pxlAdmin.controllers'
+	'ui.router',
+	'pxlAdmin.controllers',
+	'pxlAdmin.services'
 ]).
-config(['$routeProvider', function($routeProvider) {
-	$routeProvider.when('/register', {templateUrl: 'partials/register.html', controller: 'registerController'});
-	// $routeProvider.otherwise({redirectTo: '/login'});
-}]);
+config(function($stateProvider, $urlRouterProvider) {
+    
+    $urlRouterProvider.otherwise('/users');
+    
+    $stateProvider
+        .state('users', {
+            url: '/users',
+            templateUrl: '../views/home/login.html',
+            controller: 'loginController',
+		    data: {
+		    	title: 'PXLAdmin - Login'
+		    }     
+        })
+        .state('users.register', {
+            url: '/register',
+            templateUrl: '../views/home/register.html',
+            controller: 'registerController',
+		    data: {
+		    	title: 'PXLAdmin - Register'
+		    }
+        })
+        .state('dashboard', {
+            url: '/dashboard/:id',
+	        views: {
+	        	
+	            '': {
+	            	templateUrl: 'views/dashboard/header.html',
+	            	controller: 'userController'
+	            },
+
+	            'campaignView@dashboard': { 
+	                templateUrl: 'views/dashboard/campaigns.html',
+	                controller: 'campaignController'
+	            }
+	        },
+		    data: {
+		    	title: 'PXLAdmin - Dashboard'
+		    }      
+        });
+        
+});
