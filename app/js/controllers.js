@@ -29,7 +29,7 @@ controller('userController', function ($scope, $stateParams, $timeout, $upload, 
 	$scope.imageSelected = false;
 	$scope.files = []
 	pxlAdminService.getCreatives($stateParams.id).success(function(response) {
-		if(response.length !== 0) {
+		if(response.length === 0) {
 			$('#intro_modal').modal('show');
 		}
 	});
