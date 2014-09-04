@@ -191,7 +191,7 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 
 	$scope.addCreativeToCampaign = function(creative) {
 		var selectedCampaign =  $scope.campaigns[$scope.selectedIndex];
-		pxlAdminService.addCampaignCreative( selectedCampaign.campaignId, creative, selectedCampaign ).success(function(response) {
+		pxlAdminService.addCampaignCreative( selectedCampaign._id, creative, selectedCampaign ).success(function(response) {
 			// Update campaignCreatives
 			// console.log(response);
 		});
@@ -199,7 +199,7 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 
 	$scope.removeCreativeFromCampaign = function(creative) {
 		var selectedCampaign =  $scope.campaigns[$scope.selectedIndex];
-		pxlAdminService.removeCampaignCreative( selectedCampaign.campaignId, creative, selectedCampaign ).success(function(response) {
+		pxlAdminService.removeCampaignCreative( selectedCampaign._id, creative, selectedCampaign ).success(function(response) {
 			// console.log(response);
 		});
 	}

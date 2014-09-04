@@ -7,7 +7,7 @@ angular.module('pxlAdmin', [
 ]).
 config(function($stateProvider, $urlRouterProvider) {
     
-    // $urlRouterProvider.otherwise('/users');
+    $urlRouterProvider.otherwise('/users');
     
     $stateProvider
         .state('users', {
