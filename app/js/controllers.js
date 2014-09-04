@@ -193,7 +193,7 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 		var selectedCampaign =  $scope.campaigns[$scope.selectedIndex];
 		pxlAdminService.addCampaignCreative( selectedCampaign._id, creative, selectedCampaign ).success(function(response) {
 			// Update campaignCreatives
-			// console.log(response);
+			console.log(response);
 		});
 	}
 
