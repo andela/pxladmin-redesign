@@ -1,10 +1,10 @@
 angular.module('pxlAdmin.controllers', ['nvd3ChartDirectives', 'angularFileUpload']).
-controller('loginController', function ($scope, pxlAdminService, $window) {
+controller('loginController', function ($scope, pxlAdminService, $state) {
 	$scope.isLoggedIn = false;
 	$scope.doLogin = function() {
 		pxlAdminService.login($scope.pxl_username, $scope.pxl_password).success(function(response) {
 			$scope.isLoggedIn = true;
-			$window.location.href = "/dashboard/#/" + response._id;
+			$state.go('dashboard', {id: response._id});
 		});
 	}
 	
