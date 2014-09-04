@@ -24,7 +24,7 @@
                     <div class="vertical-button-group">
                         <a href="#/edit/{{ id }}" class="btn btn-primary">Edit</a>
                         <a href="#/disable/{{ id }}" class="btn btn-primary">Disable</a>
-                        <a href="#/manage/{{ id }}" class="btn btn-primary">Manage Creatives</a>
+                        <a class="btn btn-primary" ng-click="manageCreativeModal(selectedIndex)">Manage Creatives</a>
                     </div>
                 </div>
             </div>
@@ -81,3 +81,136 @@
         </div>
     </div>
 </div>
+<!-- Manage Creatives Modal -->
+<div class="modal fade" id="manage-creatives">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Manage Creatives</h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-content-div">
+                    <h3 class="manage-creative-section-title">Campaign Creatives</h3>
+                    <div class="image-slider" ng-show="campaignCreatives">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <a ng-click="sliderPrev()">Prev</a>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="row">
+                                    <div class="col-md-4" ng-repeat="creative in campaignCreatives" ng-show="showSlide({{$index}})">
+                                        <div class="creative-box">
+                                            <img ng-src="{{creative.image}}"/>
+                                            <a ng-click = "removeCreativeFromCampaign(creative)" class="modal-btn">Remove</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <a ng-click="sliderNext()">Next</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="no-image-notification" ng-hide="campaignCreatives">
+                        No creatives associated with this campaign
+                    </div>
+                    <h3 class="manage-creative-section-title">Account Creatives</h3>
+                    <div class="image-slider" ng-show="accountCreatives">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <a ng-click="sliderAccountPrev()">Prev</a>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="row">
+                                    <div class="col-md-4" ng-repeat="creative in accountCreatives" ng-show="showAccountSlide({{$index}})">
+                                        <div class="creative-box">
+                                            <img ng-src="{{creative.image}}"/>
+                                            <a ng-click = "addCreativeToCampaign(creative)" class="modal-btn">Add</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <a ng-click="sliderAccountNext()">Next</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="no-image-notification" ng-hide="accountCreatives">
+                        No creatives associated with this account
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Save Changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Intro Modal (If you don't have any creatives) -->
+<!-- a class="btn btn-primary" data-toggle="modal" href='#modal-id'>Trigger modal</a -->
+<div class="modal fade" id="intro_modal" data-backdrop="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Starting Creating Content</h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-content-div">
+                    <img src="../img/creative_icon.png"/>
+                    <h3>Hi, it looks like you haven't uploaded any creatives yet!</h3>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" href='#creative_upload_modal'>Upload your first creative</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Upload Creative Modal -->
+<div class="modal fade" id="creative_upload_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">New Creative</h4>
+            </div>
+            <form novalidate method="POST" role="form" enctype="multipart/form-data" name="uploadForm" ng-submit="doFileUpload()">
+                <div class="modal-body">
+                    <div class="modal-content-div" style="text-align:left">
+                        <div class="alert alert-danger" ng-hide="isValidImage">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <strong>Invalid Image</strong> You need to select either a PNG or JPG image
+                        </div>
+                        <div class="form-group" ng-class="{'has-error has-feedback': uploadForm.creative_name.$dirty && uploadForm.creative_name.$invalid, 'has-success has-feedback': uploadForm.creative_name.$valid}">
+                            <label for="creative_name" class="sr-only">Image Name</label>
+                            <input type="text" class="form-control" id="" placeholder="Image Name" name="creative_name" ng-model="creative_name" required>
+                            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="uploadForm.creative_name.$valid"></span>
+                            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="uploadForm.creative_name.$dirty && uploadForm.creative_name.$invalid"></span>
+                        </div>
+                        <div class="form-group">
+                            <!-- input type="file" class="form-control" id="" ng-model="creative_image" -->
+                            <div class="uk-form-file">
+                                <button class="uk-button" style="font-size: 1.0em;">Select Image</button>
+                                <input type="file" ng-file-select="onFileSelect($files)">
+                            </div>
+                        </div>
+                        <div class="uk-placeholder" style="text-align:center">
+                            <div ng-hide="imageSelected">No image selected</div>
+                            <div ng-show="imageSelected"><img id="uploadImage" src="#" alt="Your Image" /></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="!uploadForm.$valid">Upload</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -289,7 +289,61 @@ body {
 }
 .modal-content-div input.form-control {
     border-radius: 2px;
-    height: 50px;
     font-family: "Roboto", Arial, sans-serif;
-    font-size: 1.4em;
+    height: 40px;
+}
+.creative-box {
+    border: solid 1px #efefef;
+    padding: 5px;
+}
+.creative-box:hover {
+    border-color: #08c;
+    cursor: pointer;
+}
+h3.manage-creative-section-title {
+    text-align: left;
+    font-size: 1.0em;
+    margin-bottom: 15px;
+    margin-top:0;
+    background: #f9f9f9;
+    border: solid 1px #efefef;
+    padding: 9px 12px;
+    font-weight: 200;
+    border-radius: 3px;
+}
+.no-image-notification {
+    border: dashed 1px #efefef;
+    padding: 40px;
+    text-align: center;
+    border-radius: 3px;
+}
+.no-image-notification, .image-slider {
+    margin-bottom: 30px;
+}
+.modal-btn {
+    display: block;
+    margin-top: 5px;
+    background: #f2f2f2;
+    background-image: -webkit-linear-gradient(top, #f2f2f2, #e6e6e6);
+    background-image: -moz-linear-gradient(top, #f2f2f2, #e6e6e6);
+    background-image: -ms-linear-gradient(top, #f2f2f2, #e6e6e6);
+    background-image: -o-linear-gradient(top, #f2f2f2, #e6e6e6);
+    background-image: linear-gradient(to bottom, #f2f2f2, #e6e6e6);
+    -webkit-border-radius: 3;
+    -moz-border-radius: 3;
+    border-radius: 3px;
+    font-family: Arial;
+    color: #7d7d7d;
+    font-size: 0.85em;
+    font-weight: 700;
+    padding: 7px 15px 7px 15px;
+    border: solid #cfcfcf 1px;
+    text-decoration: none;
+}
+
+.modal-btn:hover {
+    background: #ebebeb;
+    border-color: #999;
+    text-decoration: none;
+    color: #656565;
 }

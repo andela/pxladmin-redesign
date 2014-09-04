@@ -56,7 +56,9 @@ factory('pxlAdminService', function ($http, $upload) {
 		});
 	}
 
-	pxlAdmin.addCreative = function(id, file, filename) {
+	// Creates a single creative
+	pxlAdmin.addCreative = function(id, creative) {
+		/*
 		return $upload.upload({
         	method: 'POST',
         	url: base_url + '/api/creatives/' + id,
@@ -70,7 +72,53 @@ factory('pxlAdminService', function ($http, $upload) {
 	        // customize how data is added to formData. See #40#issuecomment-28612000 for sample code
 	        //formDataAppender: function(formData, key, val){}
       	});
+		*/
+		return $http({
+			method: 'POST',
+			url: base_url + '/api/creatives/' + id,
+			data: creative
+		})
+	}
+
+	// Adds creative to the campaign
+	pxlAdmin.addCampaignCreative = function(id, creative, campaign) {
+		var creatives = [];
+		creatives.push(creative);
+		return $http({
+			method: 'POST',
+			url: base_url + '/api/campaign/addCreative/' + id,
+			data: {
+				campaign: campaign,
+				newCreatives: creatives
+			}
+		});
+	}
+
+	// Removes creative from the campaign
+	pxlAdmin.removeCampaignCreative = function(id, creative, campaign) {
+		var creatives = [];
+		creatives.push(creative);
+		return $http({
+			method: 'POST',
+			url: base_url + '/api/campaign/removeCreative/' + id,
+			data: {
+				campaign: campaign,
+				newCreatives: creatives
+			}
+		});
+	}
+
+	// Set primary creative of the campaign
+	pxlAdmin.newPrimaryCreative = function(id, creative, campaign) {
+		return $http({
+			method: 'POST',
+			url: base_url + '/api/campaign/newPrimary/' + id,
+			data: {
+				campaign: campaign,
+				primary: creative
+			}
+		});
 	}
 
 	return pxlAdmin;
-})
+});

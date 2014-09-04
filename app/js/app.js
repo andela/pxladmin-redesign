@@ -7,7 +7,7 @@ angular.module('pxlAdmin', [
 ]).
 config(function($stateProvider, $urlRouterProvider) {
     
-    $urlRouterProvider.otherwise('/users');
+    // $urlRouterProvider.otherwise('/users');
     
     $stateProvider
         .state('users', {
@@ -32,7 +32,7 @@ config(function($stateProvider, $urlRouterProvider) {
 	        	
 	            '': {
 	            	templateUrl: 'views/dashboard/header.html',
-	            	controller: 'userController'
+	            	controller: 'pagesController'
 	            },
 
 	            'campaignView@dashboard': { 
