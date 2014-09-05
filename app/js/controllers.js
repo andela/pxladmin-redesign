@@ -150,7 +150,18 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 	
 	$scope.manageCreativeModal = function() {
 		$('#manage-creatives').modal('show');
-		
+	}
+	$scope.refreshCampaignCreatives = function() {
+		$scope.campaignCreatives = [];
+	    if($scope.campaigns[$scope.selectedIndex].creatives.length !== 0) {
+			for(var i in $scope.campaigns[$scope.selectedIndex].creatives)
+			{
+				var creative = $scope.campaigns[$scope.selectedIndex].creatives[i];
+				if(creative !== null) {
+					$scope.campaignCreatives.push(creative);
+				}
+			}
+		}
 	}
 	
 	$scope.setSelected = function(index) {
@@ -178,29 +189,32 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 	    $scope.impressionData = [{ "key": "Impressions", "values": impressionSet }];
 	    
 	    // Populate the campaignCreatives Array
-	    $scope.campaignCreatives = [];
-	    if($scope.campaigns[$scope.selectedIndex].creatives.length !== 0) {
-			for(var creative in $scope.campaigns[$scope.selectedIndex].creatives)
-			{
-				if(creative !== null) {
-					$scope.campaignCreatives.push(creative);
-				}
-			}
-		}
+	    $scope.refreshCampaignCreatives();
 	}
 
 	$scope.addCreativeToCampaign = function(creative) {
 		var selectedCampaign =  $scope.campaigns[$scope.selectedIndex];
-		pxlAdminService.addCampaignCreative( selectedCampaign._id, creative, selectedCampaign ).success(function(response) {
-			// Update campaignCreatives
-			console.log(response);
-		});
+		var found = false;
+		for(var i in $scope.campaignCreatives) {
+			if( $scope.campaignCreatives[i]._id == creative._id ) {
+				found = true;
+				break;
+			}
+		}
+		if(!found) {
+			pxlAdminService.addCampaignCreative( selectedCampaign._id, creative, selectedCampaign ).success(function(response) {
+				$scope.campaigns[$scope.selectedIndex] = response;
+				$scope.refreshCampaignCreatives();
+			});
+		}
 	}
 
 	$scope.removeCreativeFromCampaign = function(creative) {
 		var selectedCampaign =  $scope.campaigns[$scope.selectedIndex];
 		pxlAdminService.removeCampaignCreative( selectedCampaign._id, creative, selectedCampaign ).success(function(response) {
-			// console.log(response);
+			console.log(response);
+			//$scope.campaigns[$scope.selectedIndex] = response;
+			//$scope.refreshCampaignCreatives();
 		});
 	}
 
@@ -214,7 +228,7 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 	});
 
 	pxlAdminService.getCreatives($stateParams.id).success(function(response) {
-		if(response.length === 0) {
+		if(response.length !== 0) {
 			$('#intro_modal').modal('show');
 		} else {
 			$scope.accountCreatives = response;
