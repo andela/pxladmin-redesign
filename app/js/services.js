@@ -75,7 +75,7 @@ factory('pxlAdminService', function ($http, $upload) {
 		*/
 		return $http({
 			method: 'POST',
-			url: base_url + '/api/creatives/' + id,
+			url: base_url + '/api/creatives/create/' + id,
 			data: creative
 		})
 	}
@@ -118,6 +118,14 @@ factory('pxlAdminService', function ($http, $upload) {
 				primary: creative
 			}
 		});
+	}
+
+	// Get account representation
+	pxlAdmin.getAccount = function(id) {
+		return $http({
+			method: 'GET',
+			url: base_url + '/api/account/' + id
+		})
 	}
 
 	return pxlAdmin;

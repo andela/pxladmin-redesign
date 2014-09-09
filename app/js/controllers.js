@@ -26,9 +26,28 @@ controller('registerController', function ($scope, pxlAdminService) {
 	}
 }).
 controller('pagesController', function ($scope, $stateParams, $timeout, $upload, pxlAdminService) {
+	$scope.id = $stateParams.id;
+}).
+controller('accountController', function($scope, $stateParams, pxlAdminService){
 
+	/* ======================================
+		VARIABLE DECLARATION & INITIALIZATION
+	========================================= */
+
+	// $scope.selectedIndex = 0;
+	$scope.id = $stateParams.id;
+
+	/* ======================================
+		SERVICE CALLS
+	========================================= */
+
+	pxlAdminService.getAccount($scope.id).success(function(response) {
+		$scope.account = response;
+		console.log(response);
+	});
 }).
 controller('campaignController', function($scope, $stateParams, $timeout, pxlAdminService) {
+
 	/* ======================================
 		USER-DEFINED FUNCTIONS
 	========================================= */
@@ -213,8 +232,15 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 		var selectedCampaign =  $scope.campaigns[$scope.selectedIndex];
 		pxlAdminService.removeCampaignCreative( selectedCampaign._id, creative, selectedCampaign ).success(function(response) {
 			console.log(response);
-			//$scope.campaigns[$scope.selectedIndex] = response;
-			//$scope.refreshCampaignCreatives();
+			$scope.campaigns[$scope.selectedIndex] = response;
+			$scope.refreshCampaignCreatives();
+		});
+	}
+
+	$scope.setPrimaryCreative = function(creative) {
+		var selectedCampaign = $scope.campaigns[$scope.selectedIndex];
+		pxlAdminService.newPrimaryCreative( selectedCampaign._id, creative, selectedCampaign ).success(function() {
+			console.log(response)
 		});
 	}
 

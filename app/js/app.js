@@ -35,7 +35,7 @@ config(function($stateProvider, $urlRouterProvider) {
 	            	controller: 'pagesController'
 	            },
 
-	            'campaignView@dashboard': { 
+	            'pageView@dashboard': { 
 	                templateUrl: 'views/dashboard/campaigns.html',
 	                controller: 'campaignController'
 	            }
@@ -43,6 +43,24 @@ config(function($stateProvider, $urlRouterProvider) {
 		    data: {
 		    	title: 'PXLAdmin - Dashboard'
 		    }      
+        })
+        .state('dashboard.account', {
+            url: '/account',
+            views: {
+	        	
+	            '': {
+	            	templateUrl: 'views/dashboard/header.html',
+	            	controller: 'pagesController'
+	            },
+
+	            'pageView@dashboard': { 
+	                templateUrl: 'views/dashboard/account.html',
+	                controller: 'accountController'
+	            }
+	        },
+		    data: {
+		    	title: 'PXLAdmin - Dashboard'
+		    }         
         });
         
 });

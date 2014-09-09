@@ -347,3 +347,25 @@ h3.manage-creative-section-title {
     text-decoration: none;
     color: #656565;
 }
+
+h3.detail-title {
+    font-size: 1.2em;
+    font-weight: 700;
+    border-bottom: 1px solid #dedede;
+    padding-bottom: 5px;
+    margin-top: 2.0em;
+}
+.money-box {
+    background: #F9F9F9;
+    border: 1px solid #efefef;
+    border-radius: 2px;
+    padding: 10px 15px;
+}
+.money-box h1 {
+    font-size: 3.2em !important;
+}
+.money-box p {
+    font-size: 1.0em;
+    font-family: 'Roboto', Arial, sans-serif;
+    margin-top: 0.7em;
+}
