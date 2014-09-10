@@ -61,5 +61,5 @@ Now browse to the app at `http://localhost:8000/app`.
         filters.js      --> custom angular filters
         services.js     --> custom angular services
       partials/             --> angular view partials (partial html templates)
-        partial1.html
-        partial2.html
+        dasbboard/          --> dashboard views
+        home/               --> home views
