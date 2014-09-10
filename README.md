@@ -46,7 +46,6 @@ npm start
 Now browse to the app at `http://localhost:8000/app`.
 
 
-
 ## Directory Layout
 
     app/                --> all of the files to be used in production
