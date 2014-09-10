@@ -132,8 +132,7 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 			for (var i = 0; i < $scope.files.length; i++) {
 		      	var file = $scope.files[i];
 		      	$scope.selectedUploadImage.name = $scope.creative_name;
-		      	pxlAdminService.addCreative($stateParams.id, $scope.selectedUploadImage).success(function(response) {
-		        	// console.log(data);
+		      	pxlAdminService.addCreative($scope.selectedUploadImage).success(function(response) {
 		        	$('#creative_upload_modal').modal('hide');
 		      	});
 		    }
@@ -239,7 +238,7 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 
 	$scope.setPrimaryCreative = function(creative) {
 		var selectedCampaign = $scope.campaigns[$scope.selectedIndex];
-		pxlAdminService.newPrimaryCreative( selectedCampaign._id, creative, selectedCampaign ).success(function() {
+		pxlAdminService.newPrimaryCreative( selectedCampaign._id, creative, selectedCampaign ).success(function(response) {
 			console.log(response)
 		});
 	}
@@ -254,7 +253,7 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 	});
 
 	pxlAdminService.getCreatives($stateParams.id).success(function(response) {
-		if(response.length !== 0) {
+		if(response.length === 0) {
 			$('#intro_modal').modal('show');
 		} else {
 			$scope.accountCreatives = response;
