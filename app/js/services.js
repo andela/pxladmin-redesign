@@ -48,6 +48,15 @@ factory('pxlAdminService', function ($http, $upload) {
 			url: base_url + '/api/campaignsByAcct/' + id
 		});
 	}
+
+	// Get single campaign
+	pxlAdmin.getCampaign = function(id) {
+		return $http({
+			method: 'GET',
+			url: base_url + '/api/campaign/' + id
+		});
+	}
+
 	// Get all creatives for user
 	pxlAdmin.getCreatives = function(id) {
 		return $http({
@@ -117,7 +126,10 @@ factory('pxlAdminService', function ($http, $upload) {
 	pxlAdmin.updateAccount = function(account) {
 		return $http({
 			method: 'POST',
-			url: base_url + '/api/account/update'
+			url: base_url + '/api/account/update',
+			data: {
+
+			}
 		})
 	}
 

@@ -167,6 +167,8 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 	}
 	
 	$scope.manageCreativeModal = function() {
+		$scope.sliderFirst = 0;
+		$scope.accountSliderFirst = 0;
 		$('#manage-creatives').modal('show');
 	}
 	$scope.refreshCampaignCreatives = function() {
@@ -208,6 +210,9 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 	    
 	    // Populate the campaignCreatives Array
 	    $scope.refreshCampaignCreatives();
+	    pxlAdminService.getCampaign(campaign._id).success(function(response) {
+	    	console.log(response);
+	    })
 	}
 
 	$scope.addCreativeToCampaign = function(creative) {

@@ -369,3 +369,20 @@ h3.detail-title {
     font-family: 'Roboto', Arial, sans-serif;
     margin-top: 0.7em;
 }
+.arrow-box {
+    padding-top: 30px;
+}
+.left-arrow {
+    background: url(../img/left_arrow.png) no-repeat;
+}
+.right-arrow {
+    background: url(../img/right_arrow.png) no-repeat;
+}
+.left-arrow, .right-arrow {
+    display: inline-block;
+    width: 24px; height: 24px;
+    opacity: 0.4;
+}
+.left-arrow:hover, .right-arrow:hover {
+    opacity: 1.0;
+}
