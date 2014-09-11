@@ -58,10 +58,20 @@ body {
     padding-left: 35px;
     border-right: 1px solid #efefef;
 }
-#user-div .campaign-menu > .call_to_action a.btn-success {
+a.btn-success {
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 700;
+    font-size: 0.85em !important;
     margin-left: 20px;
+    background: #52b266 !important;
+    border: none !important;
+}
+a.btn-success:hover {
+    background: #64ba76 !important;
+}
+a.btn-success i {
+    color: #208338;
+    margin-right: 5px;
 }
 #user-div .campaign-menu > .user {
     float: left;
@@ -84,9 +94,15 @@ body {
     text-align: right;
     padding-right: 35px;
 }
-#user-div .user-information .menu button, #user-div .user-information .menu ul li a {
+#user-div .user-information .menu button {
     font-family: "Roboto", Arial, sans-serif;
     font-size: 0.9em;
+}
+
+#user-div .user-information .menu ul li a {
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 700;
+    color: #676767;
 }
 #user-div .user-information .balance {
     margin-right: 50px;
@@ -203,13 +219,15 @@ body {
     color: #168051;
     font-weight: 200;
 }
-.campaign-statistics {
-    margin-bottom: 20px;
-    margin-top: 20px;
+.section-header {
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 700;
     font-size: 1.2em;
     color: #999;
+    margin-bottom: 20px;    
+}
+.campaign-statistics {
+    margin-top: 20px;
 }
 .stats-div {
     border: solid 1px #efefef;
@@ -294,11 +312,68 @@ body {
 }
 .creative-box {
     border: solid 1px #efefef;
-    padding: 5px;
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px 0 rgba(0,0,0,0.06);
 }
 .creative-box:hover {
-    border-color: #08c;
-    cursor: pointer;
+    border-color: #545454;
+}
+.creative-box .image-section {
+    position: relative;
+    min-height: 100px;
+}
+.creative-box .name-section {
+    text-align: left;
+    padding:10px;
+}
+.creative-box .name-section em {
+    font-weight: 700;
+    font-size: 0.9em;
+    font-style: normal;
+    color: #343434;
+}
+.creative-box .image-section img {
+    border-radius: 4px 4px 0 0;
+}
+.creative-box-overlay {
+    display: none;
+    position: absolute;
+    left: 0; right: 0; top: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    opacity: 0;
+    text-align: center;
+}
+.creative-box:hover .creative-box-overlay {
+    display: block;
+    opacity: 1.0;
+}
+.creative-box-overlay a {
+    position: absolute;
+    display: block;
+    top: 0; bottom: 0; left: 0; right: 0;
+    height: 34px;
+    width: 70%;
+    line-height: 34px;
+    border: #fff solid 1px;
+    color: #fff;
+    text-decoration: none;
+    margin: auto auto;
+    border-radius: 2px;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 0.9em;
+    transition: all .2s;
+}
+.creative-box-overlay a:hover {
+    background: rgba(255,255,255,0.3);
+    transition: all .2s;
+}
+.creative-controls {
+    float:right;
+}
+.creative-controls a {
+    color: #999;
+    text-decoration: none;
 }
 h3.manage-creative-section-title {
     text-align: left;

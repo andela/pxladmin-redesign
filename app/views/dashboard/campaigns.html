@@ -101,9 +101,19 @@
                                 <div class="row">
                                     <div class="col-md-4" ng-repeat="creative in campaignCreatives" ng-show="showSlide({{$index}})">
                                         <div class="creative-box">
-                                            <img ng-src="{{creative.image}}"/>
-                                            <a ng-click = "removeCreativeFromCampaign(creative)" class="modal-btn"><i class="glyphicon glyphicon-trash"></i> Remove</a>
-                                            <a ng-click = "setPrimaryCreative(creative)" class="primary-creative">Set as Primary Creative</a>
+                                            <div class="image-section">
+                                                <div class="creative-box-overlay">
+                                                    <a href="{{creative.image}}" target="_BLANK">View Image</a>
+                                                </div>
+                                                <img ng-src="{{creative.image}}"/>
+                                            </div>
+                                            <div class="name-section">
+                                                <em>{{creative.name}}</em>
+                                                <div class="creative-controls">
+                                                    <a ng-click = "removeCreativeFromCampaign(creative)"><i class="glyphicon glyphicon-trash"></i></a>
+                                                    <a ng-click = "setPrimaryCreative(creative)" ><i class="glyphicon glyphicon-star"></i></a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -126,8 +136,18 @@
                                 <div class="row">
                                     <div class="col-md-4" ng-repeat="creative in accountCreatives" ng-show="showAccountSlide({{$index}})">
                                         <div class="creative-box">
-                                            <img ng-src="{{creative.image}}"/>
-                                            <a ng-click = "addCreativeToCampaign(creative)" class="modal-btn">Add</a>
+                                            <div class="image-section">
+                                                <div class="creative-box-overlay">
+                                                    <a>View Image</a>
+                                                </div>
+                                                <img ng-src="{{creative.image}}"/>
+                                            </div>
+                                            <div class="name-section">
+                                                <em>{{creative.name}}</em>
+                                                <div class="creative-controls">
+                                                    <a ng-click = "addCreativeToCampaign(creative)"><i class="glyphicon glyphicon-plus"></i></a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
