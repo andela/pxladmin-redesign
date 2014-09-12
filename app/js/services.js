@@ -16,31 +16,24 @@ factory('pxlAdminService', function ($http, $upload) {
 		return $http({
 			method: 'POST',
 			url: base_url + '/api/account/usercreate',
-			data: { accountData: {
-				AmountOutstanding: 0,
-				TotalMonthSpend: 0,
-				campaignLimit: 0,
-				companyName: userdetails.companyName,
-				contactEmail: userdetails.contactEmail,
-	  			contactFirst: userdetails.contactFirst,
-	  			contactLast: userdetails.contactLast,
-	  			contactPass: userdetails.contactPass,
-	  			contactPhone: userdetails.contactPhone,
-	  			sfdcId: userdetails.sfdcId,
-	  			userLimit: 1
-			} }
+			data: { 
+				accountData: {
+					AmountOutstanding: 0,
+					TotalMonthSpend: 0,
+					campaignLimit: 0,
+					companyName: userdetails.companyName,
+					contactEmail: userdetails.contactEmail,
+		  			contactFirst: userdetails.contactFirst,
+		  			contactLast: userdetails.contactLast,
+		  			contactPass: userdetails.contactPass,
+		  			contactPhone: userdetails.contactPhone,
+		  			sfdcId: userdetails.sfdcId,
+		  			userLimit: 1
+				}
+			}
 		});
 	}
 
-	pxlAdmin.getDetails = function(id) {
-		
-		/*return $http({
-			method: 'POST',
-			url: base_url + '/api/login',
-			data: { un: username, pw: password }
-		});*/
-
-	}
 	// Get all campaigns for user
 	pxlAdmin.getCampaigns = function(id) {
 		return $http({
@@ -54,6 +47,22 @@ factory('pxlAdminService', function ($http, $upload) {
 		return $http({
 			method: 'GET',
 			url: base_url + '/api/campaign/' + id
+		});
+	}
+
+	// Get single campaign
+	pxlAdmin.updateCampaign = function(campaign) {
+		return $http({
+			method: 'POST',
+			url: base_url + '/api/campaign/update/' + campaign._id,
+			data: {
+				campaign: {
+					_id: campaign._id,
+					owner: campaign.owner,
+					landingUrl: campaign.landingUrl,
+					name: campaign.name
+				}
+			}
 		});
 	}
 
@@ -75,12 +84,12 @@ factory('pxlAdminService', function ($http, $upload) {
 	}
 
 	// Adds creative to the campaign
-	pxlAdmin.addCampaignCreative = function(id, creative, campaign) {
+	pxlAdmin.addCampaignCreative = function(creative, campaign) {
 		var creatives = [];
 		creatives.push(creative);
 		return $http({
 			method: 'POST',
-			url: base_url + '/api/campaign/addCreative/' + id,
+			url: base_url + '/api/campaign/addCreative/' + campaign._id,
 			data: {
 				campaign: campaign,
 				newCreatives: creatives
@@ -89,12 +98,12 @@ factory('pxlAdminService', function ($http, $upload) {
 	}
 
 	// Removes creative from the campaign
-	pxlAdmin.removeCampaignCreative = function(id, creative, campaign) {
+	pxlAdmin.removeCampaignCreative = function(creative, campaign) {
 		var creatives = [];
 		creatives.push(creative);
 		return $http({
 			method: 'POST',
-			url: base_url + '/api/campaign/removeCreative/' + id,
+			url: base_url + '/api/campaign/removeCreative/' + campaign._id,
 			data: {
 				campaign: campaign,
 				newCreatives: creatives
@@ -103,10 +112,10 @@ factory('pxlAdminService', function ($http, $upload) {
 	}
 
 	// Set primary creative of the campaign
-	pxlAdmin.newPrimaryCreative = function(id, creative, campaign) {
+	pxlAdmin.newPrimaryCreative = function(creative, campaign) {
 		return $http({
 			method: 'POST',
-			url: base_url + '/api/campaign/newPrimary/' + id,
+			url: base_url + '/api/campaign/newPrimary/' + campaign._id,
 			data: {
 				campaign: campaign,
 				primary: creative
@@ -126,10 +135,8 @@ factory('pxlAdminService', function ($http, $upload) {
 	pxlAdmin.updateAccount = function(account) {
 		return $http({
 			method: 'POST',
-			url: base_url + '/api/account/update',
-			data: {
-
-			}
+			url: base_url + '/api/account/update/',
+			data: { accountData: account }
 		})
 	}
 

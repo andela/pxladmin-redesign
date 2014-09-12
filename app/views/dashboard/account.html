@@ -12,7 +12,7 @@
             <div class="section-header">
                 <div class="row">
                     <div class="col-md-8">Account Information</div>
-                    <div class="col-md-4" align="right"><a class="btn btn-success"><i class="glyphicon glyphicon-pencil"></i> Edit Account Information</a></div>
+                    <div class="col-md-4" align="right"><a class="btn btn-success" ng-click="editAccountModal()"><i class="glyphicon glyphicon-pencil"></i> Edit Account Information</a></div>
                 </div>
             </div>
             <div class="row">
@@ -43,11 +43,157 @@
                 </div>
                 <div class="col-md-6">
                     <h3 class="detail-title">Billing Info</h3>
-                    <p>{{ account.contactFirst + " " + account.contactLast }}</p>
-                    <p>{{ account.contactEmail }}</p>
-                    <p>{{ account.contactPhone }}</p>
+                    <p>{{ account.address1 }},</p>
+                    <p>{{ account.address2 }}</p>
+                    <p>{{ account.city }} {{ "," + account.state }}</p>
+                    <p>{{ account.zip }}</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- Edit account modal -->
+<div class="modal fade" id="edit-account">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Edit Account</h4>
+            </div>
+            <form novalidate method="POST" role="form" name="editAccountForm" ng-submit="doAccountUpdate()" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="modal-content-div" style="text-align:left">
+                        <div class="alert alert-danger" ng-hide="editAccountForm.$valid">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <strong>Invalid Input</strong> One of your form fields is not valid
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': editAccountForm.companyName.$dirty && editAccountForm.companyName.$invalid, 'has-success has-feedback': editAccountForm.companyName.$valid}">
+                            <label for="companyName" class="col-sm-3 control-label">Company Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="" placeholder="Company Name" name="companyName" ng-model="account.companyName" required>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': editAccountForm.sfdcId.$dirty && editAccountForm.sfdcId.$invalid, 'has-success': editAccountForm.sfdcId.$valid}">
+                            <label for="sfdcId" class="col-sm-3 control-label">SFDC ID</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="" placeholder="SFDC ID" name="sfdcId" ng-model="account.sfdcId" required>
+                            </div>
+                        </div>
+                        <h3 class="modal-section-title">Contact Information</h3>
+                        <div class="form-group" ng-class="{'has-error': editAccountForm.contactFirst.$dirty && editAccountForm.contactFirst.$invalid, 'has-success': editAccountForm.contactFirst.$valid}">
+                            <label for="contactFirst" class="col-sm-3 control-label">First Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="" placeholder="First Name" name="contactFirst" ng-model="account.contactFirst" required>
+                            </div>
+                        </div>  
+                        <div class="form-group" ng-class="{'has-error': editAccountForm.contactEmail.$dirty && editAccountForm.contactEmail.$invalid, 'has-success': editAccountForm.contactEmail.$valid}">
+                            <label for="contactEmail" class="col-sm-3 control-label">E-mail</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" id="" placeholder="E-mail" name="contactEmail" ng-model="account.contactEmail" required>
+                            </div>
+                        </div> 
+                        <div class="form-group" ng-class="{'has-error': editAccountForm.contactLast.$dirty && editAccountForm.contactLast.$invalid, 'has-success': editAccountForm.contactLast.$valid}">
+                            <label for="contactLast" class="col-sm-3 control-label">Last Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="" placeholder="Last Name" name="contactLast" ng-model="account.contactLast" required>
+                            </div>
+                        </div>  
+                        <div class="form-group" ng-class="{'has-error': editAccountForm.contactPhone.$dirty && editAccountForm.contactPhone.$invalid, 'has-success': editAccountForm.contactPhone.$valid}">
+                            <label for="contactPhone" class="col-sm-3 control-label">Phone Number</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="" placeholder="Phone Number" name="contactPhone" ng-model="account.contactPhone" required>
+                            </div>
+                        </div>  
+                        <h3 class="modal-section-title">Billing Information</h3>
+                        <div class="form-group" ng-class="{'has-error': editAccountForm.address1.$dirty && editAccountForm.address1.$invalid, 'has-success': editAccountForm.address1.$valid}">
+                            <label for="address1" class="col-sm-3 control-label">Address</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="" placeholder="Address" name="address1" ng-model="account.address1" required>
+                            </div>
+                        </div> 
+                        <div class="form-group" ng-class="{'has-error': editAccountForm.address2.$dirty && editAccountForm.address2.$invalid, 'has-success': editAccountForm.address2.$valid}">
+                            <label for="address2" class="col-sm-3 control-label">Address 2</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="" placeholder="Address 2" name="address2" ng-model="account.address2">
+                            </div>
+                        </div>  
+                        <div class="form-group" ng-class="{'has-error': editAccountForm.city.$dirty && editAccountForm.city.$invalid, 'has-success': editAccountForm.city.$valid}">
+                            <label for="city" class="col-sm-3 control-label">City</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="" placeholder="City" name="city" ng-model="account.city" required>
+                            </div>
+                        </div>  
+                        <div class="form-group" ng-class="{'has-error': editAccountForm.state.$dirty && editAccountForm.state.$invalid, 'has-success': editAccountForm.state.$valid}">
+                            <label for="state" class="col-sm-3 control-label">State</label>
+                            <div class="col-sm-9">
+                                <select name="zip" class="form-control" ng-model="account.state">
+                                    <option value="AL">Alabama</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="AZ">Arizona</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="CA">California</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="DC">District Of Columbia</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WA">Washington</option>
+                                    <option value="WV">West Virginia</option>
+                                    <option value="WI">Wisconsin</option>
+                                    <option value="WY">Wyoming</option>
+                                </select>
+                            </div>
+                        </div>  
+                        <div class="form-group" ng-class="{'has-error': editAccountForm.zip.$dirty && editAccountForm.zip.$invalid, 'has-success': editAccountForm.zip.$valid}">
+                            <label for="zip" class="col-sm-3 control-label">Zip Code</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="" placeholder="Zip Code" name="zip" ng-model="account.zip" required>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="!editAccountForm.$valid">Save Changes</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -38,12 +38,25 @@ controller('accountController', function($scope, $stateParams, pxlAdminService){
 	$scope.id = $stateParams.id;
 
 	/* ======================================
+		CONTROLLER ACTIONS
+	========================================= */
+	$scope.editAccountModal = function() {
+		$('#edit-account').modal('show');
+	}
+
+	$scope.doAccountUpdate = function() {
+		pxlAdminService.updateAccount($scope.account).success(function(response) {
+			$('#edit-account').modal('hide');
+		})
+	}
+
+	/* ======================================
 		SERVICE CALLS
 	========================================= */
 
 	pxlAdminService.getAccount($scope.id).success(function(response) {
 		$scope.account = response;
-		console.log(response);
+		delete $scope.account.contactPass;
 	});
 }).
 controller('campaignController', function($scope, $stateParams, $timeout, pxlAdminService) {
@@ -98,11 +111,15 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 	========================================= */
 
 	$scope.sliderNext = function() {
-		$scope.sliderFirst = ++$scope.sliderFirst === $scope.campaignCreatives.length ? 0 : $scope.sliderFirst;
+		if($scope.sliderFirst + 3 < $scope.campaignCreatives.length) {
+			$scope.sliderFirst = ++$scope.sliderFirst === $scope.campaignCreatives.length ? 0 : $scope.sliderFirst;
+		}
 	} 
 
 	$scope.sliderPrev = function() {
-		$scope.sliderFirst = --$scope.sliderFirst < 0 ? $scope.campaignCreatives.length - 1 : $scope.sliderFirst;
+		if($scope.sliderFirst !== 0) {
+			$scope.sliderFirst = --$scope.sliderFirst < 0 ? $scope.campaignCreatives.length - 1 : $scope.sliderFirst;
+		}
 	} 
 
 	$scope.showSlide = function(index) {
@@ -113,11 +130,15 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 	} 
 
 	$scope.sliderAccountNext = function() {
-		$scope.accountSliderFirst = ++$scope.accountSliderFirst === $scope.accountCreatives.length ? 0 : $scope.accountSliderFirst;
+		if($scope.accountSliderFirst + 3 < $scope.accountCreatives.length) {
+			$scope.accountSliderFirst = ++$scope.accountSliderFirst === $scope.accountCreatives.length ? 0 : $scope.accountSliderFirst;
+		}
 	} 
 
 	$scope.sliderAccountPrev = function() {
-		$scope.accountSliderFirst = --$scope.accountSliderFirst < 0 ? $scope.accountCreatives.length - 1 : $scope.accountSliderFirst;
+		if($scope.accountSliderFirst !== 0) {
+			$scope.accountSliderFirst = --$scope.accountSliderFirst < 0 ? $scope.accountCreatives.length - 1 : $scope.accountSliderFirst;
+		}
 	} 
 
 	$scope.showAccountSlide = function(index) {
@@ -171,6 +192,11 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 		$scope.accountSliderFirst = 0;
 		$('#manage-creatives').modal('show');
 	}
+
+	$scope.editCampaignModal = function() {
+		$('#edit-campaign').modal('show');
+	}
+
 	$scope.refreshCampaignCreatives = function() {
 		$scope.campaignCreatives = [];
 	    if($scope.campaigns[$scope.selectedIndex].creatives.length !== 0) {
@@ -210,9 +236,6 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 	    
 	    // Populate the campaignCreatives Array
 	    $scope.refreshCampaignCreatives();
-	    pxlAdminService.getCampaign(campaign._id).success(function(response) {
-	    	console.log(response);
-	    })
 	}
 
 	$scope.addCreativeToCampaign = function(creative) {
@@ -225,7 +248,7 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 			}
 		}
 		if(!found) {
-			pxlAdminService.addCampaignCreative( selectedCampaign._id, creative, selectedCampaign ).success(function(response) {
+			pxlAdminService.addCampaignCreative( creative, selectedCampaign ).success(function(response) {
 				$scope.campaigns[$scope.selectedIndex] = response;
 				$scope.refreshCampaignCreatives();
 			});
@@ -234,7 +257,7 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 
 	$scope.removeCreativeFromCampaign = function(creative) {
 		var selectedCampaign =  $scope.campaigns[$scope.selectedIndex];
-		pxlAdminService.removeCampaignCreative( selectedCampaign._id, creative, selectedCampaign ).success(function(response) {
+		pxlAdminService.removeCampaignCreative( creative, selectedCampaign ).success(function(response) {
 			console.log(response);
 			$scope.campaigns[$scope.selectedIndex] = response;
 			$scope.refreshCampaignCreatives();
@@ -243,9 +266,16 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 
 	$scope.setPrimaryCreative = function(creative) {
 		var selectedCampaign = $scope.campaigns[$scope.selectedIndex];
-		pxlAdminService.newPrimaryCreative( selectedCampaign._id, creative, selectedCampaign ).success(function(response) {
+		pxlAdminService.newPrimaryCreative( creative, selectedCampaign ).success(function(response) {
 			console.log(response)
 		});
+	}
+
+	$scope.doCampaignUpdate = function() {
+		var selectedCampaign =  $scope.campaigns[$scope.selectedIndex];
+		pxlAdminService.updateCampaign( selectedCampaign ).success(function(response) {
+			$('#edit-campaign').modal('hide');
+		})
 	}
 
 	/* ======================================

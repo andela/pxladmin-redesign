@@ -22,9 +22,9 @@
                 </div>
                 <div class="col-md-3">
                     <div class="vertical-button-group">
-                        <a href="#/edit/{{ id }}" class="btn btn-primary">Edit</a>
+                        <a class="btn btn-primary" ng-click="editCampaignModal()">Edit</a>
                         <a href="#/disable/{{ id }}" class="btn btn-primary">Disable</a>
-                        <a class="btn btn-primary" ng-click="manageCreativeModal(selectedIndex)">Manage Creatives</a>
+                        <a class="btn btn-primary" ng-click="manageCreativeModal()">Manage Creatives</a>
                     </div>
                 </div>
             </div>
@@ -230,6 +230,44 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary" ng-disabled="!uploadForm.$valid">Upload</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Edit campaign modal -->
+<div class="modal fade" id="edit-campaign">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Edit Campaign</h4>
+            </div>
+            <form novalidate method="POST" role="form" name="editCampaignForm" ng-submit="doCampaignUpdate()" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="modal-content-div" style="text-align:left">
+                        <div class="alert alert-danger" ng-hide="editCampaignForm.$valid">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <strong>Invalid Input</strong> One of your form fields is not valid
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': editCampaignForm.name.$dirty && editCampaignForm.name.$invalid, 'has-success has-feedback': editCampaignForm.name.$valid}">
+                            <label for="name" class="col-sm-3 control-label">Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="" placeholder="Campaign Name" name="name" ng-model="campaigns[selectedIndex].name" required>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': editCampaignForm.landingUrl.$dirty && editCampaignForm.landingUrl.$invalid, 'has-success': editCampaignForm.landingUrl.$valid}">
+                            <label for="landingUrl" class="col-sm-3 control-label">Landing URL</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="" placeholder="Landing URL" name="landingUrl" ng-model="campaigns[selectedIndex].landingUrl" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="!editCampaignForm.$valid">Save Changes</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->
