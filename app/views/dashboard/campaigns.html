@@ -16,7 +16,7 @@
                         <h4>Campaign ID: <span class="value">{{ campaigns[selectedIndex].campaignId }}</span></h4>
                         <h4>Landing Page URL:
                             <span class="value" ng-show="campaigns[selectedIndex].landingUrl"><a ng-href="http://{{ campaigns[selectedIndex].landingUrl }}">{{ campaigns[selectedIndex].landingUrl }}</a></span>
-                            <span class="value" ng-hide="campaigns[selectedIndex].landingUrl"><a ng-click="setLandingUrl()">Set Landing Page URL</a></span>
+                            <span class="value" ng-hide="campaigns[selectedIndex].landingUrl"><a ng-click="editCampaignModal()">Set Landing Page URL</a></span>
                         </h4>
                     </div>
                 </div>
