@@ -1,17 +1,14 @@
 <div id="campaign-container-div">
-    <div class="list-view">
-        <ul class="campaign-list">
-            <li ng-repeat="campaign in campaigns" ng-class="{selected: $index === selectedIndex}" ng-click="setSelected($index)">
-                <h1>{{ campaign.name }}</h1>
-                <p>{{ campaign.campaignId }}</p>
-            </li>
-        </ul>
-    </div>
-    <div class="detail-view">
+    <div class="detail-view fullscreen">
         <div class="campaign-detail">
             <div class="section-header">
                 <div class="row">
-                    <div class="col-md-8">Account Information</div>
+                    <div class="col-md-8">
+                        <ol class="breadcrumb">
+                          <li><a ui-sref="dashboard">Dashboard</a></li>
+                          <li class="active">Account Settings</li>
+                        </ol>
+                    </div>
                     <div class="col-md-4" align="right"><a class="btn btn-success" ng-click="editAccountModal()"><i class="glyphicon glyphicon-pencil"></i> Edit Account Information</a></div>
                 </div>
             </div>
