@@ -25,8 +25,60 @@ controller('registerController', function ($scope, pxlAdminService) {
 		});
 	}
 }).
-controller('pagesController', function ($scope, $stateParams, $timeout, $upload, pxlAdminService) {
+controller('pagesController', function ($scope, $stateParams, $upload, pxlAdminService) {
+	$scope.pageActions = { reloadImages: false };
 	$scope.id = $stateParams.id;
+	$scope.imageSelected = false;
+	$scope.files = [];
+	$scope.selectedUploadImage = {};
+	$scope.isValidImage = true;
+
+	// Open New Creative Modal
+	$scope.newCreativeModal = function() {
+		$('#creative-upload-modal').modal('show');
+	}
+
+	// Upload the image
+	$scope.doFileUpload = function() {
+		if($scope.isValidImage) {
+			for (var i = 0; i < $scope.files.length; i++) {
+		      	var file = $scope.files[i];
+		      	$scope.selectedUploadImage.name = $scope.creative_name;
+		      	pxlAdminService.addCreative($scope.selectedUploadImage).success(function(response) {
+		        	$('#creative-upload-modal').modal('hide');
+		        	$scope.pageActions.reloadImages = true;
+		      	});
+		    }
+		}
+	}
+
+	// Select the image and Load preview.
+	$scope.onFileSelect = function($files) {
+	    //$files: an array of files selected, each file has name, size, and type.
+	    $scope.files = $files;
+	    if($files && $files[0]) {
+	    	if($files[0].type === "image/jpeg" || $files[0].type === "image/png") {
+	    		$scope.isValidImage = true;
+	    		$scope.imageSelected = true;
+			    var reader = new FileReader();
+		        reader.onload = function (e) {
+		        	var imageObj = new Image();
+					imageObj.src = e.target.result;
+					var scale = imageObj.width > imageObj.height ? 400/imageObj.width : 400/imageObj.height ;
+		            $('#uploadImage').attr('src', e.target.result).width(imageObj.width * scale).height(imageObj.height * scale);
+		            // Formulate the object
+		            $scope.selectedUploadImage.width = imageObj.width;
+		            $scope.selectedUploadImage.height = imageObj.height;
+		            $scope.selectedUploadImage.imageType = $scope.files[0].type === "image/jpeg" ? 'jpg' : 'png';
+		            $scope.selectedUploadImage.image = e.target.result;
+		            $scope.selectedUploadImage.owner = $scope.id;
+		        }
+		        reader.readAsDataURL($files[0]);
+		    } else {
+		    	$scope.isValidImage = false;
+		    }
+	    }
+	}
 }).
 controller('accountController', function($scope, $stateParams, pxlAdminService){
 
@@ -64,7 +116,7 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 	/* ======================================
 		USER-DEFINED FUNCTIONS
 	========================================= */
-
+	
 	/* Returns a month number as a double digit */
 	var return_double_digit = function(number) {    
 	    if(number <= 99)
@@ -96,15 +148,10 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 	
 	$scope.selectedIndex = 0;
 	$scope.id = $stateParams.id;
-
-	$scope.imageSelected = false;
-	$scope.files = []
 	$scope.accountCreatives = [];
 	$scope.campaignCreatives = [];
 	$scope.sliderFirst = 0;
 	$scope.accountSliderFirst = 0;
-	$scope.selectedUploadImage = {};
-	$scope.isValidImage = true;
 
 	/* ======================================
 		CONTROLLER ACTIONS
@@ -147,49 +194,16 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 		else
 			return false;
 	} 
-
-	$scope.doFileUpload = function() {
-		if($scope.isValidImage) {
-			for (var i = 0; i < $scope.files.length; i++) {
-		      	var file = $scope.files[i];
-		      	$scope.selectedUploadImage.name = $scope.creative_name;
-		      	pxlAdminService.addCreative($scope.selectedUploadImage).success(function(response) {
-		        	$('#creative_upload_modal').modal('hide');
-		      	});
-		    }
-		}
-	}
-
-	$scope.onFileSelect = function($files) {
-	    //$files: an array of files selected, each file has name, size, and type.
-	    $scope.files = $files;
-	    if($files && $files[0]) {
-	    	if($files[0].type === "image/jpeg" || $files[0].type === "image/png") {
-	    		$scope.isValidImage = true;
-	    		$scope.imageSelected = true;
-			    var reader = new FileReader();
-		        reader.onload = function (e) {
-		        	var imageObj = new Image();
-					imageObj.src = e.target.result;
-					var scale = imageObj.width > imageObj.height ? 400/imageObj.width : 400/imageObj.height ;
-		            $('#uploadImage').attr('src', e.target.result).width(imageObj.width * scale).height(imageObj.height * scale);
-		            // Formulate the object
-		            $scope.selectedUploadImage.width = imageObj.width;
-		            $scope.selectedUploadImage.height = imageObj.height;
-		            $scope.selectedUploadImage.imageType = $scope.files[0].type === "image/jpeg" ? 'jpg' : 'png';
-		            $scope.selectedUploadImage.image = e.target.result;
-		            $scope.selectedUploadImage.owner = $scope.id;
-		        }
-		        reader.readAsDataURL($files[0]);
-		    } else {
-		    	$scope.isValidImage = false;
-		    }
-	    }
-	}
 	
 	$scope.manageCreativeModal = function() {
 		$scope.sliderFirst = 0;
 		$scope.accountSliderFirst = 0;
+
+		if($scope.pageActions.reloadImages) {
+			// Get new images
+			$scope.loadAccountCreatives();
+		}
+
 		$('#manage-creatives').modal('show');
 	}
 
@@ -208,6 +222,17 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 				}
 			}
 		}
+	}
+
+	$scope.loadAccountCreatives = function() {
+		pxlAdminService.getCreatives($stateParams.id).success(function(response) {
+			if(response.length === 0) {
+				$('#intro-modal').modal('show');
+			} else {
+				$scope.accountCreatives = response;
+			}
+			$scope.pageActions.reloadImages = false;
+		});
 	}
 	
 	$scope.setSelected = function(index) {
@@ -285,13 +310,8 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 	pxlAdminService.getCampaigns($stateParams.id).success(function(response) {
 		$scope.campaigns = response;
 		$scope.setSelected(0);
+		$scope.loadAccountCreatives();
 	});
 
-	pxlAdminService.getCreatives($stateParams.id).success(function(response) {
-		if(response.length === 0) {
-			$('#intro_modal').modal('show');
-		} else {
-			$scope.accountCreatives = response;
-		}
-	});
+
 });
