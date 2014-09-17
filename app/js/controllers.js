@@ -26,6 +26,7 @@ controller('registerController', function ($scope, pxlAdminService) {
 	}
 }).
 controller('pagesController', function ($scope, $stateParams, $upload, pxlAdminService) {
+	$scope.variables = { campaigns: null }
 	$scope.pageActions = { reloadImages: false };
 	$scope.id = $stateParams.id;
 	$scope.imageSelected = false;
@@ -36,6 +37,11 @@ controller('pagesController', function ($scope, $stateParams, $upload, pxlAdminS
 	// Open New Creative Modal
 	$scope.newCreativeModal = function() {
 		$('#creative-upload-modal').modal('show');
+	}
+
+	// Open New Campaign Modal
+	$scope.createCampaignModal = function() {
+		$('#create-campaign').modal('show');
 	}
 
 	// Upload the image
@@ -303,12 +309,35 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 		})
 	}
 
+	$scope.doCampaignCreate = function() {
+		pxlAdminService.createCampaign( $scope.id, $scope.newCampaign ).success(function(response) {
+			$('#create-campaign').modal('hide');
+		})
+	}
+
+	$scope.enableCampaign = function() {
+		var selectedCampaign =  $scope.campaigns[$scope.selectedIndex];
+		pxlAdminService.enableCampaign( selectedCampaign._id ).success(function(response) {
+			$scope.campaigns[$scope.selectedIndex].disabled = false;
+			$scope.campaigns[$scope.selectedIndex].status = "Active";
+		});
+	}
+
+	$scope.disableCampaign = function() {
+		var selectedCampaign =  $scope.campaigns[$scope.selectedIndex];
+		pxlAdminService.disableCampaign( selectedCampaign._id ).success(function(response) {
+			$scope.campaigns[$scope.selectedIndex].disabled = true;
+			$scope.campaigns[$scope.selectedIndex].status = "Inactive";
+		});
+	}
+
 	/* ======================================
 		SERVICE CALLS
 	========================================= */
 
 	pxlAdminService.getCampaigns($stateParams.id).success(function(response) {
 		$scope.campaigns = response;
+		console.log(response);
 		$scope.setSelected(0);
 		$scope.loadAccountCreatives();
 	});

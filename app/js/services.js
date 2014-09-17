@@ -50,7 +50,7 @@ factory('pxlAdminService', function ($http, $upload) {
 		});
 	}
 
-	// Get single campaign
+	// Update the selected campaign
 	pxlAdmin.updateCampaign = function(campaign) {
 		return $http({
 			method: 'POST',
@@ -64,6 +64,40 @@ factory('pxlAdminService', function ($http, $upload) {
 				}
 			}
 		});
+	}
+
+	// Create a new campaign
+	pxlAdmin.createCampaign = function(owner, campaign) {
+		return $http({
+			method: 'POST',
+			url: base_url + '/api/campaign/create/',
+			data: {
+				campaign: {
+					owner: owner,
+					campaignId: "N/A",
+					sampleAssetUrl: "N/A",
+					pixelId: "N/A",
+					disabled: false,
+					primary: creative,
+					landingUrl: campaign.landingUrl,
+					name: campaign.name
+				}
+			}
+		});
+	}
+
+	pxlAdmin.enableCampaign = function(id) {
+		return $http({
+			method: 'GET',
+			url: base_url + '/api/campaign/enable/' + id
+		})
+	}
+
+	pxlAdmin.disableCampaign = function(id) {
+		return $http({
+			method: 'GET',
+			url: base_url + '/api/campaign/disable/' + id
+		})
 	}
 
 	// Get all creatives for user

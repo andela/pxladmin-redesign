@@ -11,7 +11,7 @@
         <div class="campaign-detail">
             <div class="row">
                 <div class="col-md-9">
-                    <h1>{{ campaigns[selectedIndex].name }} <span ng-class="{'badge success': campaigns[selectedIndex].status == 'Active', 'badge warning': campaigns[selectedIndex].status == 'Pending', 'badge danger': campaigns[selectedIndex].status == 'Inactive'}">{{ campaigns[selectedIndex].status }}</span></h1>
+                    <h1>{{ campaigns[selectedIndex].name }} <span ng-class="{'badge success': campaigns[selectedIndex].status === 'Active', 'badge warning': campaigns[selectedIndex].status === 'Pending', 'badge danger': campaigns[selectedIndex].status === 'Inactive'}">{{ campaigns[selectedIndex].status }}</span></h1>
                     <div class="bs-callout bs-callout-info">
                         <h4>Campaign ID: <span class="value">{{ campaigns[selectedIndex].campaignId }}</span></h4>
                         <h4>Landing Page URL:
@@ -23,7 +23,8 @@
                 <div class="col-md-3">
                     <div class="vertical-button-group">
                         <a class="btn btn-primary" ng-click="editCampaignModal()">Edit</a>
-                        <a class="btn btn-primary">Disable</a>
+                        <a class="btn btn-primary" ng-show="campaigns[selectedIndex].disabled === true" ng-click="enableCampaign()">Enable</a>
+                        <a class="btn btn-primary" ng-show="campaigns[selectedIndex].disabled === undefined || campaigns[selectedIndex].disabled === false" ng-click="disableCampaign()">Disable</a>
                         <a class="btn btn-primary" ng-click="manageCreativeModal()">Manage Creatives</a>
                     </div>
                 </div>
@@ -61,8 +62,10 @@
                     <div class="graph-title">Daily Clicks</div>
                     <nvd3-line-chart
                         data="clickData"
+                        height="300"
                         showXAxis="true"
                         showYAxis="true"
+                        yAxisScale="[0,1000]"
                         tooltips="true"
                         interactive="true">
                     </nvd3-line-chart>
@@ -71,8 +74,10 @@
                     <div class="graph-title">Daily Impressions</div>
                     <nvd3-multi-bar-chart
                         data="impressionData"
+                        height="300"
                         showXAxis="true"
                         showYAxis="true"
+                        yAxisScale="[0,1000]"
                         tooltips="true"
                         interactive="true">
                     </nvd3-line-chart>
@@ -181,7 +186,7 @@
             <form novalidate method="POST" role="form" name="editCampaignForm" ng-submit="doCampaignUpdate()" class="form-horizontal">
                 <div class="modal-body">
                     <div class="modal-content-div" style="text-align:left">
-                        <div class="alert alert-danger" ng-hide="editCampaignForm.$valid">
+                        <div class="alert alert-danger" ng-hide="editCampaignForm.$valid || !editCampaignForm.$dirty">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                             <strong>Invalid Input</strong> One of your form fields is not valid
                         </div>
@@ -202,6 +207,44 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary" ng-disabled="!editCampaignForm.$valid">Save Changes</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Create campaign modal -->
+<div class="modal fade" id="create-campaign">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Create Campaign</h4>
+            </div>
+            <form novalidate method="POST" role="form" name="createCampaignForm" ng-submit="doCampaignCreate()" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="modal-content-div" style="text-align:left">
+                        <div class="alert alert-danger" ng-hide="createCampaignForm.$valid || !createCampaignForm.$dirty || !createCampaignForm.name.$dirty || !createCampaignForm.landingUrl.$dirty">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <strong>Invalid Input</strong> One of your form fields is not valid
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': createCampaignForm.name.$dirty && createCampaignForm.name.$invalid, 'has-success has-feedback': createCampaignForm.name.$valid}">
+                            <label for="name" class="col-sm-3 control-label">Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="" placeholder="Campaign Name" name="name" ng-model="newCampaign.name" required>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': createCampaignForm.landingUrl.$dirty && createCampaignForm.landingUrl.$invalid, 'has-success': createCampaignForm.landingUrl.$valid}">
+                            <label for="landingUrl" class="col-sm-3 control-label">Landing URL</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="" placeholder="Landing URL" name="landingUrl" ng-model="newCampaign.landingUrl" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="!createCampaignForm.$valid">Save Changes</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->
