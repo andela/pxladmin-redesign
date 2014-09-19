@@ -467,3 +467,25 @@ h3.detail-title {
 .left-arrow:hover, .right-arrow:hover {
     opacity: 1.0;
 }
+.creative-select {
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: solid 1px #dedede;
+    box-shadow: 1px 1px 6px 0 rgba(0,0,0,0.1) inset;
+    padding: 10px;
+}
+.upload-image-box {
+    padding: 10px;
+    border: solid 1px #efefef;
+    min-height: 140px;
+    margin-bottom: 10px;
+}
+.upload-image-box:hover {
+    border-color: #08c;
+    cursor: pointer;
+}
+.upload-image-box.selected {
+    border-color: #19A838;
+    cursor: pointer;
+}

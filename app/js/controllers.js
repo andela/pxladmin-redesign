@@ -26,8 +26,8 @@ controller('registerController', function ($scope, pxlAdminService) {
 	}
 }).
 controller('pagesController', function ($scope, $stateParams, $upload, pxlAdminService) {
-	$scope.variables = { campaigns: null }
-	$scope.pageActions = { reloadImages: false };
+	$scope.variables = { accountCreatives: null }
+	$scope.pageActions = { reloadImages: false, pageImages: false };
 	$scope.id = $stateParams.id;
 	$scope.imageSelected = false;
 	$scope.files = [];
@@ -41,7 +41,19 @@ controller('pagesController', function ($scope, $stateParams, $upload, pxlAdminS
 
 	// Open New Campaign Modal
 	$scope.createCampaignModal = function() {
-		$('#create-campaign').modal('show');
+		// Load new images if page images have not been update
+		if($scope.pageActions.pageImages) {
+			pxlAdminService.getCreatives($scope.id).success(function(response) {
+				$scope.variables.accountCreatives = response;
+				$scope.pageActions.pageImages = false;
+			});
+		}
+
+		if($scope.variables.accountCreatives === null || $scope.variables.accountCreatives.length === 0) {
+			$('#intro-modal').modal('show');
+		} else {
+			$('#create-campaign').modal('show');
+		}
 	}
 
 	// Upload the image
@@ -53,6 +65,7 @@ controller('pagesController', function ($scope, $stateParams, $upload, pxlAdminS
 		      	pxlAdminService.addCreative($scope.selectedUploadImage).success(function(response) {
 		        	$('#creative-upload-modal').modal('hide');
 		        	$scope.pageActions.reloadImages = true;
+		        	$scope.pageActions.pageImages = true;
 		      	});
 		    }
 		}
@@ -158,6 +171,7 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 	$scope.campaignCreatives = [];
 	$scope.sliderFirst = 0;
 	$scope.accountSliderFirst = 0;
+	$scope.newCampaign = {};
 
 	/* ======================================
 		CONTROLLER ACTIONS
@@ -236,8 +250,10 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 				$('#intro-modal').modal('show');
 			} else {
 				$scope.accountCreatives = response;
+				$scope.variables.accountCreatives = response;
 			}
 			$scope.pageActions.reloadImages = false;
+			$scope.pageActions.pageImages = false;
 		});
 	}
 	
@@ -267,6 +283,11 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 	    
 	    // Populate the campaignCreatives Array
 	    $scope.refreshCampaignCreatives();
+	}
+
+	$scope.selectNewCampaignPrimary  = function(id) {
+		$scope.newCampaign.creative = $scope.accountCreatives[id];
+		console.log($scope.newCampaign.creative);
 	}
 
 	$scope.addCreativeToCampaign = function(creative) {
@@ -312,6 +333,7 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 	$scope.doCampaignCreate = function() {
 		pxlAdminService.createCampaign( $scope.id, $scope.newCampaign ).success(function(response) {
 			$('#create-campaign').modal('hide');
+			console.log(response);
 		})
 	}
 
@@ -337,7 +359,7 @@ controller('campaignController', function($scope, $stateParams, $timeout, pxlAdm
 
 	pxlAdminService.getCampaigns($stateParams.id).success(function(response) {
 		$scope.campaigns = response;
-		console.log(response);
+		// console.log(response);
 		$scope.setSelected(0);
 		$scope.loadAccountCreatives();
 	});

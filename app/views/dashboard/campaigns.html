@@ -240,6 +240,20 @@
                                 <input type="text" class="form-control" id="" placeholder="Landing URL" name="landingUrl" ng-model="newCampaign.landingUrl" required>
                             </div>
                         </div>
+                        <div class="form-group" ng-class="{'has-error': createCampaignForm.$dirty && newCampaign.creative === undefined, 'has-success': newCampaign.creative !== undefined }">
+                            <label for="primary" class="col-sm-3 control-label">Primary Creative</label>
+                            <div class="col-sm-9">
+                                <div class="creative-select">
+                                    <div class="row">
+                                        <div class="col-sm-6" ng-repeat="creative in accountCreatives">
+                                            <div class="upload-image-box" ng-click="selectNewCampaignPrimary($index)" ng-class="{'selected': creative._id === newCampaign.creative._id }">
+                                                <img ng-src="{{creative.image}}" class="img-responsive"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

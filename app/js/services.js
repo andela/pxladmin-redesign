@@ -78,7 +78,7 @@ factory('pxlAdminService', function ($http, $upload) {
 					sampleAssetUrl: "N/A",
 					pixelId: "N/A",
 					disabled: false,
-					primary: creative,
+					primary: campaign.creative,
 					landingUrl: campaign.landingUrl,
 					name: campaign.name
 				}
